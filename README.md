@@ -15,7 +15,8 @@
 **How it decides.** The rules come from three books: Andreas Clenow (50-day breakout, method A), Rachid Kabbaj (pullback with
 reward/risk ≥ 3, method B), Van K. Tharp (channel breakout, method C; 3R swing, method D). Fixed risk of 0.75% of the account per
 position, ATR-based stops. The code applies the rules on its own, with no manual exceptions. **No AI decides any trade**: 6 language
-models were tested as a "veto" on 300 historical signals and none did better than simply taking every signal. An AI is only used to
+models were tested as a "veto" on 300 historical signals and none did better than simply taking every signal
+([AI veto study](docs/ai-veto-study.md)). An AI is only used to
 propose research hypotheses, which the code tests on historical data and then on a shadow portfolio before any adoption.
 
 **Honesty.** The rules in force are published (`data/resume.json`; each report states the rulebook version). Losses, failures and
