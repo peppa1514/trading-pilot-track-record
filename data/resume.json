@@ -1,0 +1,74 @@
+{
+ "date": "2026-10-11",
+ "jour": 2,
+ "valeur": 1003.4772975177398,
+ "variation_pct": 0.34772975177397303,
+ "valeur_actuelle": 1000.8090551785724,
+ "horodatage_valeur": "2026-10-11T00:00:00Z",
+ "pire_baisse_pct": -1.1846959461143003,
+ "positions_ouvertes": 6,
+ "trades_fermes": 0,
+ "references_pct": {
+  "btc_conserve": 0.5761762942879001,
+  "btc_eth_50_50": 0.507074438962718,
+  "btc_ma200": 0.5761762942879001
+ },
+ "statut": "alive",
+ "vie": 1,
+ "hier": [],
+ "genere_utc": "2026-10-11T04:26:10Z",
+ "depart_utc": "2026-10-09T04:20:19Z",
+ "capital_depart": 1000.0,
+ "cahier": "v1 (D v1, A v1, C v1, B v1 ; risque 0,75 %/position)",
+ "regles": [
+  {
+   "methode": "D",
+   "version": 1,
+   "priorite": 1,
+   "risque_pct": 0.75,
+   "parametres": {
+    "rr": 3.0,
+    "stop_atr": 1.5,
+    "time_stop_days": 0
+   },
+   "description": "Tharp, swing 3R"
+  },
+  {
+   "methode": "A",
+   "version": 1,
+   "priorite": 2,
+   "risque_pct": 0.75,
+   "parametres": {
+    "stop_atr": 3.0,
+    "trail_atr": 4.0,
+    "exit_window": 25,
+    "close_trail_atr": 3.0
+   },
+   "description": "Clenow, cassure 50 jours"
+  },
+  {
+   "methode": "C",
+   "version": 1,
+   "priorite": 3,
+   "risque_pct": 0.75,
+   "parametres": {
+    "stop_atr": 3.0,
+    "trail_atr": 3.0,
+    "adverse_atr": 2.0
+   },
+   "description": "Tharp, cassure de canal"
+  },
+  {
+   "methode": "B",
+   "version": 1,
+   "priorite": 4,
+   "risque_pct": 0.75,
+   "parametres": {
+    "rr": 3.0,
+    "stop_atr": 1.5
+   },
+   "description": "Kabbaj, repli R/R ≥ 3"
+  }
+ ],
+ "par_methode": []
+}

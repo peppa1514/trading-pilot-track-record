@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto Pilot — historique public</title>
+<meta name="description" content="Historique public, quotidien et vérifiable d'un système de trading mécanique sur compte fictif (prix et frais réels Binance Futures).">
+<style>
+:root{--bg:#f7f7f4;--card:#fff;--ink:#1d1f21;--muted:#666b70;--line:#e3e3de;--accent:#1f6feb;--pos:#1a7f37;--neg:#c62828;
+--r1:#c47f00;--r2:#8250df;--r3:#7a8691;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111315;--card:#1a1d20;--ink:#e8e8e6;--muted:#9aa0a6;--line:#2c3035;
+--accent:#58a6ff;--pos:#3fb950;--neg:#f2706b;--r1:#e3a73a;--r2:#b392f0;--r3:#8b949e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111315;--card:#1a1d20;--ink:#e8e8e6;--muted:#9aa0a6;--line:#2c3035;--accent:#58a6ff;--pos:#3fb950;
+--neg:#f2706b;--r1:#e3a73a;--r2:#b392f0;--r3:#8b949e;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:960px;margin:0 auto;padding:16px}
+h1{font-size:1.35rem;margin:.2rem 0}
+h2{font-size:1.05rem;margin:1.6rem 0 .6rem}
+.sub{color:var(--muted);font-size:.9rem;margin:0}
+.warn{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--r1);border-radius:8px;padding:10px 12px;margin:14px 0;font-size:.9rem}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media (min-width:640px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.kpi .l{color:var(--muted);font-size:.78rem}
+.kpi .v{font-size:1.25rem;font-weight:600;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px}
+#chart{height:300px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.86rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--muted);font-weight:500;font-size:.78rem}
+.pos{color:var(--pos)}.neg{color:var(--neg)}.muted{color:var(--muted)}
+a{color:var(--accent)}
+footer{color:var(--muted);font-size:.82rem;margin:2rem 0 1rem}
+button.theme{float:right;background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:3px 8px;font-size:.8rem}
+</style>
+</head>
+<body>
+<main>
+<button class="theme" id="theme" type="button" aria-label="Changer de thème">◐</button>
+<h1>Crypto Pilot — historique public</h1>
+<p class="sub" id="sub">Chargement…</p>
+<div class="warn"><strong>Compte FICTIF</strong> : aucun argent réel. Prix et frais réels de Binance Futures. Système mécanique (règles des livres de
+Clenow, Tharp et Kabbaj) : aucune IA ne décide de trade. Ce n'est pas un conseil en investissement. <a href="https://github.com/peppa1514/trading-pilot-track-record#readme">Lire le README</a> · <span lang="en">Simulated account, not investment advice.</span></div>
+
+<div class="kpis" id="kpis"></div>
+
+<h2>Courbe du compte et références</h2>
+<div class="card"><div id="chart"></div>
+<div class="legend"><span><i style="background:var(--accent)"></i>Ce système</span><span><i style="background:var(--r1)"></i>BTC conservé</span>
+<span><i style="background:var(--r2)"></i>50/50 BTC-ETH</span><span><i style="background:var(--r3)"></i>BTC filtré MA200</span></div>
+<p class="sub" style="margin-top:6px">Valeur à chaque minuit UTC, départ 1 000 $ fictifs. Les références partent du même capital, au même instant.</p></div>
+
+<h2 id="pos-title">Positions ouvertes</h2>
+<div class="card tbl" id="positions"></div>
+
+<h2>Derniers trades fermés</h2>
+<div class="card tbl" id="trades"></div>
+
+<h2>Par méthode (en R)</h2>
+<div class="card tbl" id="methods"></div>
+
+<footer>Données brutes : <a href="data/equity.csv">equity.csv</a> · <a href="data/trades.csv">trades.csv</a> · <a href="data/positions.csv">positions.csv</a> ·
+<a href="data/resume.json">resume.json</a> · <a href="https://github.com/peppa1514/trading-pilot-track-record/tree/main/reports">rapports quotidiens</a> ·
+<a href="https://github.com/peppa1514/trading-pilot-track-record/commits/main">historique git (horodaté)</a>. Mis à jour chaque jour vers 00:45 UTC.</footer>
+</main>
+<script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const nf = (x, d = 2) => Number(x).toLocaleString("fr-FR", {minimumFractionDigits: d, maximumFractionDigits: d});
+const sg = (x, d = 1, u = " %") => x == null || x === "" || isNaN(x) ? "—" : (x >= 0 ? "+" : "−") + nf(Math.abs(x), d) + u;
+const cls = x => x > 0 ? "pos" : x < 0 ? "neg" : "";
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+function csv(text) {
+  const lines = text.trim().split(/\r?\n/), h = lines.shift().split(",");
+  return lines.filter(Boolean).map(l => Object.fromEntries(l.split(",").map((v, i) => [h[i], v])));
+}
+const get = (u, f) => fetch(u, {cache: "no-cache"}).then(r => r.ok ? r[f]() : Promise.reject(u));
+const dt = s => s ? s.replace("T", " ").replace(/:\d\dZ$/, "") : "—";
+
+function table(el, head, rows, empty) {
+  $(el).innerHTML = rows.length ? `<table><thead><tr>${head.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${
+    rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table>` : `<p class="muted" style="margin:4px">${empty}</p>`;
+}
+
+let chart, series = [];
+function colors() {
+  const cs = getComputedStyle(document.documentElement), v = n => cs.getPropertyValue(n).trim();
+  return {bg: v("--card"), ink: v("--muted"), line: v("--line"), s: [v("--accent"), v("--r1"), v("--r2"), v("--r3")]};
+}
+function paint() {
+  if (!chart) return;
+  const c = colors();
+  chart.applyOptions({layout: {background: {color: c.bg}, textColor: c.ink}, grid: {vertLines: {color: c.line}, horzLines: {color: c.line}}});
+  series.forEach((s, i) => s.applyOptions({color: c.s[i]}));
+}
+function drawChart(eq) {
+  if (!window.LightweightCharts || !eq.length) { $("chart").innerHTML = '<p class="muted">Courbe indisponible.</p>'; return; }
+  chart = LightweightCharts.createChart($("chart"), {autoSize: true, rightPriceScale: {borderVisible: false},
+    timeScale: {borderVisible: false, timeVisible: false}, crosshair: {mode: 0}, handleScroll: false, handleScale: false,
+    localization: {locale: "fr-FR", priceFormatter: p => nf(p, 0) + " $"}});
+  const keys = ["compte_usd", "btc_conserve_usd", "btc_eth_50_50_usd", "btc_ma200_usd"];
+  series = keys.map((k, i) => chart.addLineSeries({lineWidth: i ? 2 : 3, lineStyle: i ? 2 : 0, priceLineVisible: false,
+    lastValueVisible: i === 0, crosshairMarkerVisible: true}));
+  keys.forEach((k, i) => series[i].setData(eq.map(r => ({time: Math.floor(Date.parse(r.horodatage_utc) / 1000), value: +r[k]}))));
+  paint();
+  chart.timeScale().fitContent();
+}
+
+Promise.all([get("data/resume.json", "json"), get("data/equity.csv", "text").then(csv),
+             get("data/positions.csv", "text").then(csv), get("data/trades.csv", "text").then(csv)])
+.then(([r, eq, pos, tr]) => {
+  $("sub").textContent = `Jour ${r.jour} de l'étape 1 (départ le ${dt(r.depart_utc)} UTC) · cahier de règles ${r.cahier} · rapport généré le ${dt(r.genere_utc)} UTC`;
+  const ref = r.references_pct || {};
+  $("kpis").innerHTML = [
+    ["Compte fictif", nf(r.valeur) + " $", `<span class="${cls(r.variation_pct)}">${sg(r.variation_pct, 2)}</span> depuis le départ`],
+    ["Pire baisse", sg(r.pire_baisse_pct, 2), "du plus haut au plus bas suivant"],
+    ["BTC conservé", `<span class="${cls(ref.btc_conserve)}">${sg(ref.btc_conserve, 2)}</span>`, `50/50 : ${sg(ref.btc_eth_50_50, 2)} · MA200 : ${sg(ref.btc_ma200, 2)}`],
+    ["Positions", `${r.positions_ouvertes} ouvertes`, `${r.trades_fermes} fermées depuis le départ`],
+  ].map(([l, v, s]) => `<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+  drawChart(eq);
+  $("pos-title").textContent = `Positions ouvertes (${pos.length})`;
+  table("positions", ["Marché", "Sens", "Méth.", "Ouverte", "Entrée", "Stop", "Prix", "Latent", "R"],
+    pos.map(p => [esc(p.symbole.replace("USDT", "")), esc(p.sens), esc(p.methode), dt(p.ouverture_utc), esc(p.prix_entree), esc(p.stop || "—"),
+                  esc(p.prix_actuel), `<span class="${cls(+p.pnl_latent_usd)}">${sg(+p.pnl_latent_usd, 2, " $")}</span>`,
+                  p.r_latent === "" ? "—" : `<span class="${cls(+p.r_latent)}">${sg(+p.r_latent, 2, "")}</span>`]), "Aucune position ouverte.");
+  table("trades", ["Fermé", "Marché", "Sens", "Méth.", "R", "PnL net", "Sortie"],
+    tr.slice(-20).reverse().map(t => [dt(t.fermeture_utc), esc(t.symbole.replace("USDT", "")), esc(t.sens), esc(t.methode),
+      t.r === "" ? "—" : `<span class="${cls(+t.r)}">${sg(+t.r, 2, "")}</span>`,
+      `<span class="${cls(+t.pnl_net_usd)}">${sg(+t.pnl_net_usd, 2, " $")}</span>`, esc(t.type_sortie)]),
+    "Aucun trade fermé pour l'instant : les méthodes suivent des tendances de plusieurs jours ou semaines.");
+  table("methods", ["Méthode", "Positions", "Réussite", "Espérance", "Total", "t"],
+    (r.par_methode || []).map(m => [esc(m.methode), m.positions, nf(m.reussite_pct, 0) + " %",
+      m.esperance_R == null ? "—" : sg(m.esperance_R, 3, " R"), sg(m.total_R, 2, " R"), m.t == null ? "—" : nf(m.t, 2)]),
+    "Pas encore de position fermée.");
+}).catch(e => { $("sub").textContent = "Données indisponibles (" + e + ")."; });
+
+const btn = $("theme");
+btn.onclick = () => {
+  const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("theme", document.documentElement.dataset.theme); } catch (e) {}
+  paint();
+};
+try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint);
+</script>
+</body>
+</html>
