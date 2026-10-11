@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Crypto Pilot — historique public</title>
-<meta name="description" content="Historique public, quotidien et vérifiable d'un système de trading mécanique sur compte fictif (prix et frais réels Binance Futures).">
+<title>Crypto Pilot — public track record</title>
+<meta name="description" content="Daily, public and verifiable track record of a mechanical trading system on a simulated account (real Binance Futures prices and fees).">
 <style>
 :root{--bg:#f7f7f4;--card:#fff;--ink:#1d1f21;--muted:#666b70;--line:#e3e3de;--accent:#1f6feb;--pos:#1a7f37;--neg:#c62828;
 --r1:#c47f00;--r2:#8250df;--r3:#7a8691;color-scheme:light}
@@ -41,38 +41,40 @@ button.theme{float:right;background:none;border:1px solid var(--line);color:var(
 </head>
 <body>
 <main>
-<button class="theme" id="theme" type="button" aria-label="Changer de thème">◐</button>
-<h1>Crypto Pilot — historique public</h1>
-<p class="sub" id="sub">Chargement…</p>
-<div class="warn"><strong>Compte FICTIF</strong> : aucun argent réel. Prix et frais réels de Binance Futures. Système mécanique (règles des livres de
-Clenow, Tharp et Kabbaj) : aucune IA ne décide de trade. Ce n'est pas un conseil en investissement. <a href="https://github.com/peppa1514/trading-pilot-track-record#readme">Lire le README</a> · <span lang="en">Simulated account, not investment advice.</span></div>
+<button class="theme" id="theme" type="button" aria-label="Toggle theme">◐</button>
+<h1>Crypto Pilot — public track record</h1>
+<p class="sub" id="sub">Loading…</p>
+<div class="warn"><strong>SIMULATED account</strong>: no real money. Real Binance Futures prices and fees. Mechanical system (rules from the books
+of Clenow, Tharp and Kabbaj): no AI makes any trading decision. This is not investment advice. <a href="https://github.com/peppa1514/trading-pilot-track-record#readme">Read the README</a></div>
 
 <div class="kpis" id="kpis"></div>
 
-<h2>Courbe du compte et références</h2>
+<h2>Account value and benchmarks</h2>
 <div class="card"><div id="chart"></div>
-<div class="legend"><span><i style="background:var(--accent)"></i>Ce système</span><span><i style="background:var(--r1)"></i>BTC conservé</span>
-<span><i style="background:var(--r2)"></i>50/50 BTC-ETH</span><span><i style="background:var(--r3)"></i>BTC filtré MA200</span></div>
-<p class="sub" style="margin-top:6px">Valeur à chaque minuit UTC, départ 1 000 $ fictifs. Les références partent du même capital, au même instant.</p></div>
+<div class="legend"><span><i style="background:var(--accent)"></i>This system</span><span><i style="background:var(--r1)"></i>BTC buy &amp; hold</span>
+<span><i style="background:var(--r2)"></i>50/50 BTC-ETH</span><span><i style="background:var(--r3)"></i>BTC with 200-day MA filter</span></div>
+<p class="sub" style="margin-top:6px">Value at each midnight UTC, starting from $1,000 of simulated money. Benchmarks start with the same capital at the same time.</p></div>
 
-<h2 id="pos-title">Positions ouvertes</h2>
+<h2 id="pos-title">Open positions</h2>
 <div class="card tbl" id="positions"></div>
 
-<h2>Derniers trades fermés</h2>
+<h2>Latest closed trades</h2>
 <div class="card tbl" id="trades"></div>
 
-<h2>Par méthode (en R)</h2>
+<h2>By method (in R)</h2>
 <div class="card tbl" id="methods"></div>
 
-<footer>Données brutes : <a href="data/equity.csv">equity.csv</a> · <a href="data/trades.csv">trades.csv</a> · <a href="data/positions.csv">positions.csv</a> ·
-<a href="data/resume.json">resume.json</a> · <a href="https://github.com/peppa1514/trading-pilot-track-record/tree/main/reports">rapports quotidiens</a> ·
-<a href="https://github.com/peppa1514/trading-pilot-track-record/commits/main">historique git (horodaté)</a>. Mis à jour chaque jour vers 00:45 UTC.</footer>
+<footer>Raw data: <a href="data/equity.csv">equity.csv</a> · <a href="data/trades.csv">trades.csv</a> · <a href="data/positions.csv">positions.csv</a> ·
+<a href="data/resume.json">resume.json</a> · <a href="https://github.com/peppa1514/trading-pilot-track-record/tree/main/reports">daily reports</a> ·
+<a href="https://github.com/peppa1514/trading-pilot-track-record/commits/main">git history (timestamped)</a>. Updated daily at about 00:45 UTC. Not investment advice.</footer>
 </main>
 <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
 <script>
 const $ = id => document.getElementById(id);
-const nf = (x, d = 2) => Number(x).toLocaleString("fr-FR", {minimumFractionDigits: d, maximumFractionDigits: d});
-const sg = (x, d = 1, u = " %") => x == null || x === "" || isNaN(x) ? "—" : (x >= 0 ? "+" : "−") + nf(Math.abs(x), d) + u;
+const nf = (x, d = 2) => Number(x).toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d});
+const sg = (x, d = 1, u = "%") => x == null || x === "" || isNaN(x) ? "—" : (x >= 0 ? "+" : "-") + nf(Math.abs(x), d) + u;
+const usd = (x, d = 2, signed = false) => x == null || x === "" || isNaN(x) ? "—" : (x < 0 ? "-" : signed ? "+" : "") + "$" + nf(Math.abs(x), d);
+const meth = m => m === "autre" ? "other" : m === "total" ? "Total" : m;
 const cls = x => x > 0 ? "pos" : x < 0 ? "neg" : "";
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
 function csv(text) {
@@ -99,10 +101,10 @@ function paint() {
   series.forEach((s, i) => s.applyOptions({color: c.s[i]}));
 }
 function drawChart(eq) {
-  if (!window.LightweightCharts || !eq.length) { $("chart").innerHTML = '<p class="muted">Courbe indisponible.</p>'; return; }
+  if (!window.LightweightCharts || !eq.length) { $("chart").innerHTML = '<p class="muted">Chart unavailable.</p>'; return; }
   chart = LightweightCharts.createChart($("chart"), {autoSize: true, rightPriceScale: {borderVisible: false},
     timeScale: {borderVisible: false, timeVisible: false}, crosshair: {mode: 0}, handleScroll: false, handleScale: false,
-    localization: {locale: "fr-FR", priceFormatter: p => nf(p, 0) + " $"}});
+    localization: {locale: "en-US", priceFormatter: p => "$" + nf(p, 0)}});
   const keys = ["compte_usd", "btc_conserve_usd", "btc_eth_50_50_usd", "btc_ma200_usd"];
   series = keys.map((k, i) => chart.addLineSeries({lineWidth: i ? 2 : 3, lineStyle: i ? 2 : 0, priceLineVisible: false,
     lastValueVisible: i === 0, crosshairMarkerVisible: true}));
@@ -114,30 +116,30 @@ function drawChart(eq) {
 Promise.all([get("data/resume.json", "json"), get("data/equity.csv", "text").then(csv),
              get("data/positions.csv", "text").then(csv), get("data/trades.csv", "text").then(csv)])
 .then(([r, eq, pos, tr]) => {
-  $("sub").textContent = `Jour ${r.jour} de l'étape 1 (départ le ${dt(r.depart_utc)} UTC) · cahier de règles ${r.cahier} · rapport généré le ${dt(r.genere_utc)} UTC`;
+  $("sub").textContent = `Day ${r.jour} of stage 1 (started ${dt(r.depart_utc)} UTC) · rulebook ${r.cahier} · report generated ${dt(r.genere_utc)} UTC`;
   const ref = r.references_pct || {};
   $("kpis").innerHTML = [
-    ["Compte fictif", nf(r.valeur) + " $", `<span class="${cls(r.variation_pct)}">${sg(r.variation_pct, 2)}</span> depuis le départ`],
-    ["Pire baisse", sg(r.pire_baisse_pct, 2), "du plus haut au plus bas suivant"],
-    ["BTC conservé", `<span class="${cls(ref.btc_conserve)}">${sg(ref.btc_conserve, 2)}</span>`, `50/50 : ${sg(ref.btc_eth_50_50, 2)} · MA200 : ${sg(ref.btc_ma200, 2)}`],
-    ["Positions", `${r.positions_ouvertes} ouvertes`, `${r.trades_fermes} fermées depuis le départ`],
+    ["Simulated account", usd(r.valeur), `<span class="${cls(r.variation_pct)}">${sg(r.variation_pct, 2)}</span> since start`],
+    ["Max drawdown", sg(r.pire_baisse_pct, 2), "peak to subsequent low"],
+    ["BTC buy & hold", `<span class="${cls(ref.btc_conserve)}">${sg(ref.btc_conserve, 2)}</span>`, `50/50: ${sg(ref.btc_eth_50_50, 2)} · MA200 filter: ${sg(ref.btc_ma200, 2)}`],
+    ["Positions", `${r.positions_ouvertes} open`, `${r.trades_fermes} closed since start`],
   ].map(([l, v, s]) => `<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
   drawChart(eq);
-  $("pos-title").textContent = `Positions ouvertes (${pos.length})`;
-  table("positions", ["Marché", "Sens", "Méth.", "Ouverte", "Entrée", "Stop", "Prix", "Latent", "R"],
-    pos.map(p => [esc(p.symbole.replace("USDT", "")), esc(p.sens), esc(p.methode), dt(p.ouverture_utc), esc(p.prix_entree), esc(p.stop || "—"),
-                  esc(p.prix_actuel), `<span class="${cls(+p.pnl_latent_usd)}">${sg(+p.pnl_latent_usd, 2, " $")}</span>`,
-                  p.r_latent === "" ? "—" : `<span class="${cls(+p.r_latent)}">${sg(+p.r_latent, 2, "")}</span>`]), "Aucune position ouverte.");
-  table("trades", ["Fermé", "Marché", "Sens", "Méth.", "R", "PnL net", "Sortie"],
-    tr.slice(-20).reverse().map(t => [dt(t.fermeture_utc), esc(t.symbole.replace("USDT", "")), esc(t.sens), esc(t.methode),
+  $("pos-title").textContent = `Open positions (${pos.length})`;
+  table("positions", ["Market", "Side", "Method", "Opened (UTC)", "Entry", "Stop", "Price", "Unrealized", "R"],
+    pos.map(p => [esc(p.symbole.replace("USDT", "")), esc(p.sens), esc(meth(p.methode)), dt(p.ouverture_utc), esc(p.prix_entree), esc(p.stop || "—"),
+                  esc(p.prix_actuel), `<span class="${cls(+p.pnl_latent_usd)}">${usd(+p.pnl_latent_usd, 2, true)}</span>`,
+                  p.r_latent === "" ? "—" : `<span class="${cls(+p.r_latent)}">${sg(+p.r_latent, 2, "")}</span>`]), "No open position.");
+  table("trades", ["Closed (UTC)", "Market", "Side", "Method", "R", "Net P&L", "Exit"],
+    tr.slice(-20).reverse().map(t => [dt(t.fermeture_utc), esc(t.symbole.replace("USDT", "")), esc(t.sens), esc(meth(t.methode)),
       t.r === "" ? "—" : `<span class="${cls(+t.r)}">${sg(+t.r, 2, "")}</span>`,
-      `<span class="${cls(+t.pnl_net_usd)}">${sg(+t.pnl_net_usd, 2, " $")}</span>`, esc(t.type_sortie)]),
-    "Aucun trade fermé pour l'instant : les méthodes suivent des tendances de plusieurs jours ou semaines.");
-  table("methods", ["Méthode", "Positions", "Réussite", "Espérance", "Total", "t"],
-    (r.par_methode || []).map(m => [esc(m.methode), m.positions, nf(m.reussite_pct, 0) + " %",
+      `<span class="${cls(+t.pnl_net_usd)}">${usd(+t.pnl_net_usd, 2, true)}</span>`, esc(String(t.type_sortie).replace(/_/g, " "))]),
+    "No closed trade yet: the methods follow trends lasting several days or weeks.");
+  table("methods", ["Method", "Positions", "Win rate", "Expectancy", "Total", "t"],
+    (r.par_methode || []).map(m => [esc(meth(m.methode)), m.positions, nf(m.reussite_pct, 0) + "%",
       m.esperance_R == null ? "—" : sg(m.esperance_R, 3, " R"), sg(m.total_R, 2, " R"), m.t == null ? "—" : nf(m.t, 2)]),
-    "Pas encore de position fermée.");
-}).catch(e => { $("sub").textContent = "Données indisponibles (" + e + ")."; });
+    "No closed position yet.");
+}).catch(e => { $("sub").textContent = "Data unavailable (" + e + ")."; });
 
 const btn = $("theme");
 btn.onclick = () => {
