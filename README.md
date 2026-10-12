@@ -1,7 +1,7 @@
 <!-- genere-par-report.py -->
 # Crypto Pilot — public track record
 
-**Repository: https://github.com/peppa1514/trading-pilot-track-record** (daily reports in [reports/](reports/), raw data in [data/](data/)) · X: [@CryptoPilotBot](https://x.com/CryptoPilotBot)
+**Live page: https://peppa1514.github.io/trading-pilot-track-record/** · Repository: https://github.com/peppa1514/trading-pilot-track-record · X: [@CryptoPilotBot](https://x.com/CryptoPilotBot)
 
 **What this is.** The daily, public, timestamped track record of a **mechanical** trading system on crypto perpetual futures
 (8 Binance Futures markets: BTC, ETH, SOL, BNB, XRP, DOGE, ADA, AVAX), started on **2026-10-09 at 04:20 UTC** with
