@@ -1,1 +1,2 @@
 id,position,vie,symbole,sens,methode,ouverture_utc,fermeture_utc,prix_entree,prix_sortie,quantite,r,pnl_net_usd,frais_usd,funding_usd,type_sortie
+1,336,1,SOLUSDT,long,B,2026-10-09T04:20:27Z,2026-10-13T00:51:28Z,110.62562694,102.93480516,0.97762158,-1.024,-7.6849,0.1044,-0.0618,stop_loss

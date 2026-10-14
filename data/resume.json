@@ -1,22 +1,32 @@
 {
- "date": "2026-10-13",
- "jour": 4,
- "valeur": 984.5430570862408,
- "variation_pct": -1.5456942913759208,
- "valeur_actuelle": 977.9195859043277,
- "horodatage_valeur": "2026-10-13T00:00:00Z",
- "pire_baisse_pct": -4.353229917783352,
+ "date": "2026-10-14",
+ "jour": 5,
+ "valeur": 991.3941162486333,
+ "variation_pct": -0.8605883751366727,
+ "valeur_actuelle": 997.0308333243793,
+ "horodatage_valeur": "2026-10-14T00:00:00Z",
+ "pire_baisse_pct": -4.769469844803675,
  "positions_ouvertes": 6,
- "trades_fermes": 0,
+ "trades_fermes": 1,
  "references_pct": {
-  "btc_conserve": -0.8034376183905234,
-  "btc_eth_50_50": -1.3718300854866472,
-  "btc_ma200": -0.8034376183905123
+  "btc_conserve": 0.7950995322672849,
+  "btc_eth_50_50": 0.44483317406522893,
+  "btc_ma200": 0.7950995322673071
  },
  "statut": "alive",
  "vie": 1,
- "hier": [],
- "genere_utc": "2026-10-13T00:45:03Z",
+ "hier": [
+  {
+   "methode": "B",
+   "symbole": "SOLUSDT",
+   "sens": "long",
+   "net": -7.684866090344876,
+   "r": -1.023984522330183,
+   "fermeture": "2026-10-13T00:51:28Z",
+   "frais": 0.1043906433352052
+  }
+ ],
+ "genere_utc": "2026-10-14T00:45:03Z",
  "depart_utc": "2026-10-09T04:20:19Z",
  "capital_depart": 1000.0,
  "cahier": "v1 (D v1, A v1, C v1, B v1; risk 0.75% per position)",
@@ -70,5 +80,26 @@
    "description": "Kabbaj, pullback with R/R ≥ 3"
   }
  ],
- "par_methode": []
+ "par_methode": [
+  {
+   "methode": "B",
+   "positions": 1,
+   "reussite_pct": 0.0,
+   "esperance_R": -1.023984522330183,
+   "total_R": -1.023984522330183,
+   "t": null,
+   "pnl": -7.684866090344876,
+   "frais": 0.1043906433352052
+  },
+  {
+   "methode": "total",
+   "positions": 1,
+   "reussite_pct": 0.0,
+   "esperance_R": -1.023984522330183,
+   "total_R": -1.023984522330183,
+   "t": null,
+   "pnl": -7.684866090344876,
+   "frais": 0.1043906433352052
+  }
+ ]
 }
