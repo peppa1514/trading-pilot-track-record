@@ -1,0 +1,1317 @@
+{
+ "generated_utc": "2026-10-14T21:24:14Z",
+ "warning": "Results under ~6 months are mostly noise.",
+ "notes": [
+  "Values are at the daily close (24:00 UTC) of each date; the first row of each strategy is its starting capital at the close of the day before its forward start.",
+  "All strategies trade perpetual futures and pay or receive the real funding rate, so 'BTC buy & hold' here differs from the spot benchmark of the main page.",
+  "Backtests are NOT live results and are excluded from the ranking."
+ ],
+ "ranking_forward": [
+  "v1-books",
+  "v1-dc",
+  "v1-long",
+  "v1-dc-long",
+  "v1-max3",
+  "v1-regime",
+  "v1-funding",
+  "v1-fear",
+  "btc-hold",
+  "basket-8",
+  "btc-ma200",
+  "golden-cross",
+  "turtle-s1",
+  "turtle-s2",
+  "tsmom",
+  "xs-momentum",
+  "rsi2",
+  "bollinger-mr",
+  "fear-greed",
+  "btc-voltarget"
+ ],
+ "leader_rule_min_days": 30,
+ "strategies": [
+  {
+   "number": 1,
+   "name": "v1-books",
+   "version": 1,
+   "title": "Pilot v1 (live rules)",
+   "kind": "pilot",
+   "description": "The live pilot's rulebook v1: the 4 book methods (D > A > C > B), 0.75% risk per position, 5% total open-risk cap, one position per market. Should match the live account up to small execution differences.",
+   "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007)",
+   "params": {
+    "params": {
+     "A": {
+      "stop_atr": 3.0,
+      "trail_atr": 4.0,
+      "exit_window": 25,
+      "close_trail_atr": 3.0
+     },
+     "B": {
+      "rr": 3.0,
+      "stop_atr": 1.5
+     },
+     "C": {
+      "stop_atr": 3.0,
+      "trail_atr": 3.0,
+      "adverse_atr": 2.0
+     },
+     "D": {
+      "rr": 3.0,
+      "stop_atr": 1.5,
+      "time_stop_days": 0
+     }
+    },
+    "regime": "aucun",
+    "methodes": [
+     "D",
+     "A",
+     "C",
+     "B"
+    ],
+    "fenetre_c": 20,
+    "risque_pct": 0.75,
+    "plafond_pct": 5.0,
+    "longs_seulement": false
+   },
+   "sha256": "a0769463b55178576794ff9fdab2de092cf6ed7cbf8cfe6e43fa3e2d60c9be4f",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 17.12,
+    "final": 1131.86,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 228,
+    "by_year": {
+     "2023": 4.56,
+     "2024": 3.13,
+     "2025": 2.11,
+     "2026": 2.79
+    },
+    "funding": -24.27,
+    "t_daily": 0.69,
+    "cagr_pct": 4.41,
+    "t_trades": 0.92,
+    "return_pct": 13.19,
+    "expectancy_R": 0.084,
+    "closed_trades": 228,
+    "open_positions": 0,
+    "max_drawdown_pct": 14.34,
+    "return_to_drawdown": 0.92
+   },
+   "check_vs_live_account": {
+    "through": "2026-10-13",
+    "same_entries": true,
+    "only_lab": [],
+    "only_live": [],
+    "max_abs_equity_gap_usd": 6.32,
+    "note": "live day 0 started at 04:20 UTC; the lab enters at 00:01 UTC like the pilot does every other day"
+   }
+  },
+  {
+   "number": 2,
+   "name": "v1-dc",
+   "version": 1,
+   "title": "Pilot v1, methods D+C only",
+   "kind": "pilot",
+   "description": "Pilot v1 restricted to methods D (Tharp 3R swing) and C (Tharp channel breakout). Pre-registered hypothesis #65.",
+   "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); hypothesis from PLAN §12.6 bis (observed in backtest, so it must be judged on new data)",
+   "params": {
+    "params": {
+     "C": {
+      "stop_atr": 3.0,
+      "trail_atr": 3.0,
+      "adverse_atr": 2.0
+     },
+     "D": {
+      "rr": 3.0,
+      "stop_atr": 1.5,
+      "time_stop_days": 0
+     }
+    },
+    "regime": "aucun",
+    "methodes": [
+     "D",
+     "C"
+    ],
+    "fenetre_c": 20,
+    "risque_pct": 0.75,
+    "plafond_pct": 5.0,
+    "longs_seulement": false
+   },
+   "sha256": "babecc693125d3438b75be9420e0dced570ac0360b7344f271585ca84c9f8f8e",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 18.3,
+    "final": 1229.42,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 232,
+    "by_year": {
+     "2023": 4.56,
+     "2024": 0.86,
+     "2025": 11.69,
+     "2026": 4.37
+    },
+    "funding": -19.59,
+    "t_daily": 1.14,
+    "cagr_pct": 7.46,
+    "t_trades": 1.53,
+    "return_pct": 22.94,
+    "expectancy_R": 0.133,
+    "closed_trades": 232,
+    "open_positions": 0,
+    "max_drawdown_pct": 14.96,
+    "return_to_drawdown": 1.53
+   }
+  },
+  {
+   "number": 3,
+   "name": "v1-long",
+   "version": 1,
+   "title": "Pilot v1, longs only",
+   "kind": "pilot",
+   "description": "Pilot v1, but short signals are ignored.",
+   "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007)",
+   "params": {
+    "params": {
+     "A": {
+      "stop_atr": 3.0,
+      "trail_atr": 4.0,
+      "exit_window": 25,
+      "close_trail_atr": 3.0
+     },
+     "B": {
+      "rr": 3.0,
+      "stop_atr": 1.5
+     },
+     "C": {
+      "stop_atr": 3.0,
+      "trail_atr": 3.0,
+      "adverse_atr": 2.0
+     },
+     "D": {
+      "rr": 3.0,
+      "stop_atr": 1.5,
+      "time_stop_days": 0
+     }
+    },
+    "regime": "aucun",
+    "methodes": [
+     "D",
+     "A",
+     "C",
+     "B"
+    ],
+    "fenetre_c": 20,
+    "risque_pct": 0.75,
+    "plafond_pct": 5.0,
+    "longs_seulement": true
+   },
+   "sha256": "0163f0c6449c44071dc1c8f7e6217501d474f7dbd30faecf1d76f341c663bffe",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 15.69,
+    "final": 957.1,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 212,
+    "by_year": {
+     "2023": 4.56,
+     "2024": -1.57,
+     "2025": -7.45,
+     "2026": 0.48
+    },
+    "funding": -40.31,
+    "t_daily": -0.06,
+    "cagr_pct": -1.52,
+    "t_trades": -0.11,
+    "return_pct": -4.29,
+    "expectancy_R": -0.01,
+    "closed_trades": 212,
+    "open_positions": 0,
+    "max_drawdown_pct": 23.92,
+    "return_to_drawdown": -0.18
+   }
+  },
+  {
+   "number": 4,
+   "name": "v1-dc-long",
+   "version": 1,
+   "title": "Pilot v1, D+C longs only",
+   "kind": "pilot",
+   "description": "Pilot v1 restricted to methods D and C, long signals only.",
+   "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007)",
+   "params": {
+    "params": {
+     "C": {
+      "stop_atr": 3.0,
+      "trail_atr": 3.0,
+      "adverse_atr": 2.0
+     },
+     "D": {
+      "rr": 3.0,
+      "stop_atr": 1.5,
+      "time_stop_days": 0
+     }
+    },
+    "regime": "aucun",
+    "methodes": [
+     "D",
+     "C"
+    ],
+    "fenetre_c": 20,
+    "risque_pct": 0.75,
+    "plafond_pct": 5.0,
+    "longs_seulement": true
+   },
+   "sha256": "46e3843a2de03fa3832a5de2edc77f88e622d1d098483292ea8122283375a2ad",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 15.05,
+    "final": 1198.58,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 174,
+    "by_year": {
+     "2023": 4.56,
+     "2024": 5.73,
+     "2025": 10.02,
+     "2026": -1.46
+    },
+    "funding": -36.16,
+    "t_daily": 1.05,
+    "cagr_pct": 6.51,
+    "t_trades": 1.53,
+    "return_pct": 19.86,
+    "expectancy_R": 0.159,
+    "closed_trades": 174,
+    "open_positions": 0,
+    "max_drawdown_pct": 15.4,
+    "return_to_drawdown": 1.29
+   }
+  },
+  {
+   "number": 5,
+   "name": "v1-max3",
+   "version": 1,
+   "title": "Pilot v1, max 3 same side",
+   "kind": "pilot",
+   "description": "Pilot v1 with at most 3 open positions in the same direction (crypto markets are highly correlated).",
+   "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); correlation limit in the spirit of the Turtle rules (C. Faith, 'Way of the Turtle', 2007)",
+   "params": {
+    "params": {
+     "A": {
+      "stop_atr": 3.0,
+      "trail_atr": 4.0,
+      "exit_window": 25,
+      "close_trail_atr": 3.0
+     },
+     "B": {
+      "rr": 3.0,
+      "stop_atr": 1.5
+     },
+     "C": {
+      "stop_atr": 3.0,
+      "trail_atr": 3.0,
+      "adverse_atr": 2.0
+     },
+     "D": {
+      "rr": 3.0,
+      "stop_atr": 1.5,
+      "time_stop_days": 0
+     }
+    },
+    "regime": "aucun",
+    "methodes": [
+     "D",
+     "A",
+     "C",
+     "B"
+    ],
+    "fenetre_c": 20,
+    "risque_pct": 0.75,
+    "plafond_pct": 5.0,
+    "max_meme_sens": 3,
+    "longs_seulement": false
+   },
+   "sha256": "9ca119602be53ba0a6c2d28d70672b92d2c82fad5491b1f4985883a4d0b47a0e",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 12.8,
+    "final": 1055.17,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 162,
+    "by_year": {
+     "2023": 3.38,
+     "2024": 1.31,
+     "2025": -2.13,
+     "2026": 2.94
+    },
+    "funding": -15.38,
+    "t_daily": 0.45,
+    "cagr_pct": 1.89,
+    "t_trades": 0.47,
+    "return_pct": 5.52,
+    "expectancy_R": 0.052,
+    "closed_trades": 162,
+    "open_positions": 0,
+    "max_drawdown_pct": 9.17,
+    "return_to_drawdown": 0.6
+   }
+  },
+  {
+   "number": 6,
+   "name": "v1-regime",
+   "version": 1,
+   "title": "Pilot v1, BTC 200-day regime",
+   "kind": "pilot",
+   "description": "Pilot v1; new longs only when BTC closes above its 200-day moving average, new shorts only when it closes below.",
+   "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); 200-day regime filter: M. Faber, 'A Quantitative Approach to Tactical Asset Allocation' (2007)",
+   "params": {
+    "params": {
+     "A": {
+      "stop_atr": 3.0,
+      "trail_atr": 4.0,
+      "exit_window": 25,
+      "close_trail_atr": 3.0
+     },
+     "B": {
+      "rr": 3.0,
+      "stop_atr": 1.5
+     },
+     "C": {
+      "stop_atr": 3.0,
+      "trail_atr": 3.0,
+      "adverse_atr": 2.0
+     },
+     "D": {
+      "rr": 3.0,
+      "stop_atr": 1.5,
+      "time_stop_days": 0
+     }
+    },
+    "regime": "deux_sens",
+    "methodes": [
+     "D",
+     "A",
+     "C",
+     "B"
+    ],
+    "fenetre_c": 20,
+    "risque_pct": 0.75,
+    "plafond_pct": 5.0,
+    "longs_seulement": false
+   },
+   "sha256": "905248a4a2fa44f29b1a3008a0ae0e6b581544179fb0ce949b8de19eb5a543d1",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 13.05,
+    "final": 919.75,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 204,
+    "by_year": {
+     "2023": 0.0,
+     "2024": -15.33,
+     "2025": -3.62,
+     "2026": 12.7
+    },
+    "funding": -17.42,
+    "t_daily": -0.18,
+    "cagr_pct": -2.87,
+    "t_trades": -0.35,
+    "return_pct": -8.02,
+    "expectancy_R": -0.035,
+    "closed_trades": 204,
+    "open_positions": 0,
+    "max_drawdown_pct": 29.01,
+    "return_to_drawdown": -0.28
+   }
+  },
+  {
+   "number": 7,
+   "name": "v1-funding",
+   "version": 1,
+   "title": "Pilot v1, funding filter",
+   "kind": "pilot",
+   "description": "Pilot v1; no new long when the market's 3-day average funding rate is above +0.03% per 8 h, no new short when it is below -0.03% (avoid crowded trades).",
+   "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); funding as a crowding signal: Binance Futures funding rates (baseline 0.01% per 8 h)",
+   "params": {
+    "params": {
+     "A": {
+      "stop_atr": 3.0,
+      "trail_atr": 4.0,
+      "exit_window": 25,
+      "close_trail_atr": 3.0
+     },
+     "B": {
+      "rr": 3.0,
+      "stop_atr": 1.5
+     },
+     "C": {
+      "stop_atr": 3.0,
+      "trail_atr": 3.0,
+      "adverse_atr": 2.0
+     },
+     "D": {
+      "rr": 3.0,
+      "stop_atr": 1.5,
+      "time_stop_days": 0
+     }
+    },
+    "regime": "aucun",
+    "methodes": [
+     "D",
+     "A",
+     "C",
+     "B"
+    ],
+    "fenetre_c": 20,
+    "risque_pct": 0.75,
+    "plafond_pct": 5.0,
+    "filtre_funding": 0.0003,
+    "longs_seulement": false
+   },
+   "sha256": "137632a5eebfa67732a5475c66a2229a01060408103256e2cde9a51efdc8cbb7",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 16.69,
+    "final": 1170.83,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 211,
+    "by_year": {
+     "2023": 5.12,
+     "2024": 4.26,
+     "2025": 3.94,
+     "2026": 2.79
+    },
+    "funding": -20.23,
+    "t_daily": 0.87,
+    "cagr_pct": 5.65,
+    "t_trades": 1.15,
+    "return_pct": 17.08,
+    "expectancy_R": 0.112,
+    "closed_trades": 211,
+    "open_positions": 0,
+    "max_drawdown_pct": 13.37,
+    "return_to_drawdown": 1.28
+   }
+  },
+  {
+   "number": 8,
+   "name": "v1-fear",
+   "version": 1,
+   "title": "Pilot v1, half risk in high DVOL",
+   "kind": "pilot",
+   "description": "Pilot v1; risk per position is halved when BTC implied volatility (Deribit DVOL) is above its 90th percentile of the past year.",
+   "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); implied volatility index: Deribit DVOL; risk scaling as in A. Clenow, 'Following the Trend' (2013)",
+   "params": {
+    "params": {
+     "A": {
+      "stop_atr": 3.0,
+      "trail_atr": 4.0,
+      "exit_window": 25,
+      "close_trail_atr": 3.0
+     },
+     "B": {
+      "rr": 3.0,
+      "stop_atr": 1.5
+     },
+     "C": {
+      "stop_atr": 3.0,
+      "trail_atr": 3.0,
+      "adverse_atr": 2.0
+     },
+     "D": {
+      "rr": 3.0,
+      "stop_atr": 1.5,
+      "time_stop_days": 0
+     }
+    },
+    "regime": "aucun",
+    "methodes": [
+     "D",
+     "A",
+     "C",
+     "B"
+    ],
+    "fenetre_c": 20,
+    "risque_pct": 0.75,
+    "filtre_dvol": {
+     "mult": 0.5,
+     "jours": 365,
+     "centile": 90,
+     "min_jours": 300
+    },
+    "plafond_pct": 5.0,
+    "longs_seulement": false
+   },
+   "sha256": "3f74d32000526359845d9e5270478db1085fbd6eb33e5bac379a873817408996",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 16.89,
+    "final": 1180.78,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 225,
+    "by_year": {
+     "2023": 4.56,
+     "2024": 3.13,
+     "2025": 2.11,
+     "2026": 7.23
+    },
+    "funding": -24.41,
+    "t_daily": 0.88,
+    "cagr_pct": 5.96,
+    "t_trades": 1.17,
+    "return_pct": 18.08,
+    "expectancy_R": 0.109,
+    "closed_trades": 225,
+    "open_positions": 0,
+    "max_drawdown_pct": 14.34,
+    "return_to_drawdown": 1.26
+   }
+  },
+  {
+   "number": 9,
+   "name": "btc-hold",
+   "version": 1,
+   "title": "BTC buy & hold",
+   "kind": "lab",
+   "description": "Buy BTC perpetual once with 100% of the capital and hold it (funding paid or received like any position).",
+   "source": "Standard benchmark",
+   "params": {
+    "symbol": "BTCUSDT",
+    "weight": 1.0
+   },
+   "sha256": "06553c1ad0a466f017431e0fac5b0fd1f7413c77e4b821b4002a980fb7b38103",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 1.6,
+    "final": 1778.88,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 1,
+    "by_year": {
+     "2023": 10.08,
+     "2024": 103.79,
+     "2025": -13.33,
+     "2026": -8.51
+    },
+    "funding": -422.84,
+    "t_daily": 1.09,
+    "cagr_pct": 22.21,
+    "t_trades": null,
+    "return_pct": 77.89,
+    "expectancy_R": null,
+    "closed_trades": 1,
+    "open_positions": 0,
+    "max_drawdown_pct": 60.61,
+    "return_to_drawdown": 1.29
+   }
+  },
+  {
+   "number": 10,
+   "name": "basket-8",
+   "version": 1,
+   "title": "Equal-weight basket of 8",
+   "kind": "lab",
+   "description": "1/8 of the capital in each of the 8 markets, rebalanced to equal weights on the first day of each month.",
+   "source": "Equal-weight (1/N) allocation: V. DeMiguel, L. Garlappi & R. Uppal, Review of Financial Studies (2009)",
+   "params": {},
+   "sha256": "26866e01d920da391a0e32fbabc2ca5f7bcec99b769205d7d4c7a70163b12396",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 4.44,
+    "final": 1519.85,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 8,
+    "by_year": {
+     "2023": 32.7,
+     "2024": 108.33,
+     "2025": -33.07,
+     "2026": -17.86
+    },
+    "funding": -327.51,
+    "t_daily": 0.93,
+    "cagr_pct": 15.7,
+    "t_trades": null,
+    "return_pct": 51.99,
+    "expectancy_R": null,
+    "closed_trades": 8,
+    "open_positions": 0,
+    "max_drawdown_pct": 69.96,
+    "return_to_drawdown": 0.74
+   }
+  },
+  {
+   "number": 11,
+   "name": "btc-ma200",
+   "version": 1,
+   "title": "BTC 200-day MA filter",
+   "kind": "lab",
+   "description": "Hold BTC while its daily close is above its 200-day simple moving average, cash otherwise.",
+   "source": "M. Faber, 'A Quantitative Approach to Tactical Asset Allocation', Journal of Wealth Management (2007)",
+   "params": {
+    "ma": 200,
+    "symbol": "BTCUSDT"
+   },
+   "sha256": "86a6d98c14da24d10129479dc9a66bc809350f8b3da3b2c38fc246e5fa47f542",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 13.58,
+    "final": 1060.08,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 15,
+    "by_year": {
+     "2023": 0.0,
+     "2024": 12.77,
+     "2025": -20.84,
+     "2026": 18.75
+    },
+    "funding": -105.72,
+    "t_daily": 0.37,
+    "cagr_pct": 2.05,
+    "t_trades": null,
+    "return_pct": 6.01,
+    "expectancy_R": null,
+    "closed_trades": 15,
+    "open_positions": 0,
+    "max_drawdown_pct": 33.31,
+    "return_to_drawdown": 0.18
+   }
+  },
+  {
+   "number": 12,
+   "name": "golden-cross",
+   "version": 1,
+   "title": "Golden cross 50/200",
+   "kind": "lab",
+   "description": "On each of the 8 markets: long (1/8 of the capital) while the 50-day moving average is above the 200-day one, flat otherwise. Long only.",
+   "source": "Moving-average crossover rules: W. Brock, J. Lakonishok & B. LeBaron, Journal of Finance (1992); J. Murphy, 'Technical Analysis of the Financial Markets' (1999)",
+   "params": {
+    "fast": 50,
+    "slow": 200
+   },
+   "sha256": "64efeaf214076765d341821a4df94b833b24c4bb6d1b39195d7b8ea5c9364d2c",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 3.88,
+    "final": 791.53,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 32,
+    "by_year": {
+     "2023": 0.0,
+     "2024": 27.13,
+     "2025": -35.78,
+     "2026": -3.04
+    },
+    "funding": -70.85,
+    "t_daily": 0.07,
+    "cagr_pct": -7.82,
+    "t_trades": null,
+    "return_pct": -20.85,
+    "expectancy_R": null,
+    "closed_trades": 32,
+    "open_positions": 0,
+    "max_drawdown_pct": 53.93,
+    "return_to_drawdown": -0.39
+   }
+  },
+  {
+   "number": 13,
+   "name": "turtle-s1",
+   "version": 1,
+   "title": "Turtle System 1 (20/10)",
+   "kind": "lab",
+   "description": "Long on a close above the 20-day high, short on a close below the 20-day low; exit on the 10-day opposite channel; stop at 2 N (N = 20-day ATR); 1 unit = 1% of equity per N. Skips a breakout if the previous one was a winner (unless it is also a 55-day breakout). Simplified: entries at the next open, one unit, no pyramiding.",
+   "source": "C. Faith, 'Way of the Turtle' (2007) and 'The Original Turtle Trading Rules' (2003)",
+   "params": {
+    "n": 20,
+    "exit": 10,
+    "entry": 20,
+    "stop_n": 2.0,
+    "failsafe": 55,
+    "risk_pct_per_n": 1.0,
+    "skip_after_win": true
+   },
+   "sha256": "11c19fa2a611f591113a308c017a713c8168d123da954516da5f99bbf3c2810c",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 124.13,
+    "final": 3610.77,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 228,
+    "by_year": {
+     "2023": 26.45,
+     "2024": 127.08,
+     "2025": 7.51,
+     "2026": 16.97
+    },
+    "funding": -324.87,
+    "t_daily": 1.82,
+    "cagr_pct": 56.39,
+    "t_trades": 1.88,
+    "return_pct": 261.08,
+    "expectancy_R": 0.461,
+    "closed_trades": 228,
+    "open_positions": 0,
+    "max_drawdown_pct": 46.93,
+    "return_to_drawdown": 5.56
+   }
+  },
+  {
+   "number": 14,
+   "name": "turtle-s2",
+   "version": 1,
+   "title": "Turtle System 2 (55/20)",
+   "kind": "lab",
+   "description": "Long on a close above the 55-day high, short below the 55-day low; exit on the 20-day opposite channel; stop at 2 N; 1% of equity per N. Same simplifications as System 1.",
+   "source": "C. Faith, 'Way of the Turtle' (2007) and 'The Original Turtle Trading Rules' (2003)",
+   "params": {
+    "n": 20,
+    "exit": 20,
+    "entry": 55,
+    "stop_n": 2.0,
+    "failsafe": null,
+    "risk_pct_per_n": 1.0,
+    "skip_after_win": false
+   },
+   "sha256": "a683b6e7a7a02775796494d46f14c56d95307deecc3a68d6fbb079b0d168107a",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 55.86,
+    "final": 3569.52,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 123,
+    "by_year": {
+     "2023": 25.04,
+     "2024": 78.32,
+     "2025": 21.57,
+     "2026": 31.68
+    },
+    "funding": -286.16,
+    "t_daily": 1.79,
+    "cagr_pct": 55.76,
+    "t_trades": 2.56,
+    "return_pct": 256.95,
+    "expectancy_R": 0.679,
+    "closed_trades": 123,
+    "open_positions": 0,
+    "max_drawdown_pct": 44.11,
+    "return_to_drawdown": 5.82
+   }
+  },
+  {
+   "number": 15,
+   "name": "tsmom",
+   "version": 1,
+   "title": "Time-series momentum",
+   "kind": "lab",
+   "description": "Each month, on each of the 8 markets: long if past returns are positive (average of the 1-, 3- and 12-month signs), cash otherwise, each position scaled to 40% annualized volatility (capped at 1x), 1/8 of the capital per market.",
+   "source": "T. Moskowitz, Y. H. Ooi & L. H. Pedersen, 'Time Series Momentum', Journal of Financial Economics (2012); long-only, multi-horizon variant",
+   "params": {
+    "vol_com": 60,
+    "lookbacks": [
+     30,
+     91,
+     365
+    ],
+    "vol_target": 0.4,
+    "max_leverage": 1.0
+   },
+   "sha256": "abbb8ee0c97e9099bc4ee4512d98d12c3aa7815b44df1f6d10fd203fee1497a3",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 2.41,
+    "final": 1104.53,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 31,
+    "by_year": {
+     "2023": 0.0,
+     "2024": 21.3,
+     "2025": -8.48,
+     "2026": -0.5
+    },
+    "funding": -35.62,
+    "t_daily": 0.49,
+    "cagr_pct": 3.52,
+    "t_trades": null,
+    "return_pct": 10.45,
+    "expectancy_R": null,
+    "closed_trades": 31,
+    "open_positions": 0,
+    "max_drawdown_pct": 23.5,
+    "return_to_drawdown": 0.44
+   }
+  },
+  {
+   "number": 16,
+   "name": "xs-momentum",
+   "version": 1,
+   "title": "Cross-sectional momentum",
+   "kind": "lab",
+   "description": "Every Monday: long the 2 best of the 8 markets over the past 4 weeks (50% each), only while BTC is above its 200-day moving average; cash otherwise.",
+   "source": "N. Jegadeesh & S. Titman, Journal of Finance (1993); for crypto: Y. Liu, A. Tsyvinski & X. Wu, 'Common Risk Factors in Cryptocurrency', Journal of Finance (2022)",
+   "params": {
+    "ma": 200,
+    "top": 2,
+    "band": 0.02,
+    "weekday": 0,
+    "lookback": 28
+   },
+   "sha256": "d434ae878319ed67e59378ab05279c15f293058e14ba79210714b55a6f7437c1",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 25.18,
+    "final": 541.5,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 65,
+    "by_year": {
+     "2023": 0.0,
+     "2024": 15.63,
+     "2025": -46.68,
+     "2026": -12.17
+    },
+    "funding": -52.0,
+    "t_daily": -0.25,
+    "cagr_pct": -19.24,
+    "t_trades": null,
+    "return_pct": -45.85,
+    "expectancy_R": null,
+    "closed_trades": 65,
+    "open_positions": 0,
+    "max_drawdown_pct": 66.22,
+    "return_to_drawdown": -0.69
+   }
+  },
+  {
+   "number": 17,
+   "name": "rsi2",
+   "version": 1,
+   "title": "Connors RSI(2)",
+   "kind": "lab",
+   "description": "On each market: buy (1/8 of the capital) when the 2-day RSI is below 10 and the close is above the 200-day moving average; sell when the close is above the 5-day moving average. Long only, no stop.",
+   "source": "L. Connors & C. Alvarez, 'Short Term Trading Strategies That Work' (2008)",
+   "params": {
+    "rsi_n": 2,
+    "exit_ma": 5,
+    "trend_ma": 200,
+    "entry_below": 10
+   },
+   "sha256": "33f506a7a606a67aeede855b1d9b3f2805d19b394d275a4be86d592e3bd9bfe7",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 17.41,
+    "final": 1084.38,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 138,
+    "by_year": {
+     "2023": 0.0,
+     "2024": -1.32,
+     "2025": 5.89,
+     "2026": 3.77
+    },
+    "funding": -4.2,
+    "t_daily": 0.5,
+    "cagr_pct": 2.86,
+    "t_trades": null,
+    "return_pct": 8.44,
+    "expectancy_R": null,
+    "closed_trades": 138,
+    "open_positions": 0,
+    "max_drawdown_pct": 11.5,
+    "return_to_drawdown": 0.73
+   }
+  },
+  {
+   "number": 18,
+   "name": "bollinger-mr",
+   "version": 1,
+   "title": "Bollinger mean reversion",
+   "kind": "lab",
+   "description": "On each market: buy (1/8 of the capital) on a close below the lower Bollinger band (20 days, 2 standard deviations) while the close is above the 200-day moving average; sell at the middle band. Long only, no stop.",
+   "source": "J. Bollinger, 'Bollinger on Bollinger Bands' (2001)",
+   "params": {
+    "k": 2.0,
+    "n": 20,
+    "trend_ma": 200
+   },
+   "sha256": "f569bf3caca0c4c7e6e0c555f44a3c4d1366e4806471240a80c9dcb4d20a4c09",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 5.47,
+    "final": 1080.85,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 43,
+    "by_year": {
+     "2023": 0.0,
+     "2024": -5.7,
+     "2025": 12.07,
+     "2026": 2.28
+    },
+    "funding": -5.48,
+    "t_daily": 0.5,
+    "cagr_pct": 2.74,
+    "t_trades": null,
+    "return_pct": 8.08,
+    "expectancy_R": null,
+    "closed_trades": 43,
+    "open_positions": 0,
+    "max_drawdown_pct": 11.99,
+    "return_to_drawdown": 0.67
+   }
+  },
+  {
+   "number": 19,
+   "name": "fear-greed",
+   "version": 1,
+   "title": "Fear & Greed contrarian",
+   "kind": "lab",
+   "description": "Buy BTC (100%) when the Crypto Fear & Greed Index is below 20 (extreme fear), sell when it is above 80 (extreme greed).",
+   "source": "alternative.me Crypto Fear & Greed Index; contrarian rule 'be fearful when others are greedy' (W. Buffett, 1986 letter)",
+   "params": {
+    "symbol": "BTCUSDT",
+    "buy_below": 20,
+    "sell_above": 80
+   },
+   "sha256": "584f89257ff20df385b6ea8bed58b880546e437ed3b838680bab85bdd9ccdf90",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 2.89,
+    "final": 1449.45,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 2,
+    "by_year": {
+     "2023": 0.0,
+     "2024": 59.38,
+     "2025": -1.69,
+     "2026": -7.49
+    },
+    "funding": -130.03,
+    "t_daily": 0.9,
+    "cagr_pct": 13.8,
+    "t_trades": null,
+    "return_pct": 44.95,
+    "expectancy_R": null,
+    "closed_trades": 2,
+    "open_positions": 0,
+    "max_drawdown_pct": 55.64,
+    "return_to_drawdown": 0.81
+   }
+  },
+  {
+   "number": 20,
+   "name": "btc-voltarget",
+   "version": 1,
+   "title": "BTC volatility targeting",
+   "kind": "lab",
+   "description": "BTC exposure = 40% / realized 30-day annualized volatility, capped at 100%; rebalanced daily when the exposure is more than 5 points away from target.",
+   "source": "A. Moreira & T. Muir, 'Volatility-Managed Portfolios', Journal of Finance (2017); C. Harvey et al., 'The Impact of Volatility Targeting', Journal of Portfolio Management (2018)",
+   "params": {
+    "band": 0.05,
+    "symbol": "BTCUSDT",
+    "target": 0.4,
+    "window": 30,
+    "max_weight": 1.0
+   },
+   "sha256": "52ec03ed8a8f1dc33803af32982b5f98200a836fb2fdebd97cb0279fb4405a4b",
+   "registered_utc": "2026-10-14T21:22:44Z",
+   "forward_start_utc": "2026-10-15T00:00:00Z",
+   "status": "active",
+   "archived_utc": null,
+   "origin": "catalog",
+   "forward": {
+    "days": 0,
+    "final": 1000.0,
+    "status": "waiting",
+    "trades": 0,
+    "return_pct": 0.0,
+    "restated_days": 0,
+    "max_drawdown_pct": 0.0
+   },
+   "backtest_not_live": {
+    "days": 1048,
+    "fees": 8.15,
+    "final": 1709.37,
+    "period": "2023-12-01 → 2026-10-13",
+    "trades": 1,
+    "by_year": {
+     "2023": 9.53,
+     "2024": 91.04,
+     "2025": -12.05,
+     "2026": -7.11
+    },
+    "funding": -312.88,
+    "t_daily": 1.13,
+    "cagr_pct": 20.53,
+    "t_trades": null,
+    "return_pct": 70.94,
+    "expectancy_R": null,
+    "closed_trades": 1,
+    "open_positions": 0,
+    "max_drawdown_pct": 53.23,
+    "return_to_drawdown": 1.33
+   }
+  }
+ ]
+}

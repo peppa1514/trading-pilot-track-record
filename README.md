@@ -24,6 +24,12 @@ technical incidents are published too. Three benchmarks are always shown alongsi
 200-day moving-average filter. In backtests over 2023-12 → 2026-10, this system returned **less** than holding BTC (+16.5% vs +122%)
 with a much smaller maximum drawdown (14% vs 53%). Live trading will show what it is really worth.
 
+**Strategy Lab.** Next to the live system, 20 strategies (variants of the pilot and well-known published rules: buy & hold,
+200-day filter, Turtle systems, time-series and cross-sectional momentum, RSI(2), Bollinger, Fear & Greed, volatility targeting)
+run in parallel on simulated $1,000 accounts with the same prices, fees and funding. They were **pre-registered** with frozen code
+and parameters ([LAB.md](LAB.md), SHA-256 per strategy) and are ranked **only on data after their registration**
+([lab.html](lab.html)); historical backtests are shown separately and labelled "not live". Results under ~6 months are mostly noise.
+
 **Goal.** 12 months of verifiable history, without interruption. The git history (one commit per day, timestamped by GitHub) makes any
 rewrite visible. On the 1st of each month, the report publishes the SHA-256 hashes of the previous month's files.
 
@@ -33,6 +39,8 @@ rewrite visible. On the 1st of each month, the report publishes the SHA-256 hash
 - `data/positions.csv` — open positions at report time
 - `data/resume.json` — key figures and the rules in force
 - `reports/YYYY-MM-DD.md` — daily report
+- `lab.html`, `LAB.md`, `data/lab.csv`, `data/lab_strategies.json`, `data/lab_backtests.csv` — the Strategy Lab (forward test,
+  pre-registration, frozen list, backtests not live)
 
 Published automatically every day at about 00:45 UTC. Column names in the data files are in French (e.g. `compte_usd` = account value,
 `btc_conserve_usd` = BTC buy & hold, `methode` = method, `sens` = side, `autre` = other).
@@ -43,4 +51,5 @@ Historique quotidien, public et horodaté d'un système de trading **mécanique*
 Futures), démarré le 9 octobre 2026 à 04:20 UTC avec **1 000 $ fictifs**. **L'argent est fictif** ; les prix, frais et taux de
 financement sont réels. **Ce n'est pas un conseil en investissement.** Les règles viennent de trois livres (Clenow, Kabbaj, Tharp) ;
 aucune IA ne décide de trade. Pertes et incidents sont publiés, toujours à côté de trois références (BTC conservé, 50/50 BTC-ETH,
-BTC filtré par sa moyenne 200 jours). Rapport publié chaque jour vers 00:45 UTC, en anglais.
+BTC filtré par sa moyenne 200 jours). Un laboratoire teste en parallèle 20 autres stratégies pré-enregistrées (lab.html), classées
+uniquement sur les données postérieures à leur enregistrement. Rapport publié chaque jour vers 00:45 UTC, en anglais.

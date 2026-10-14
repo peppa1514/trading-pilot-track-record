@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto Pilot — Strategy Lab</title>
+<meta name="description" content="Twenty pre-registered trading strategies forward-tested in parallel on simulated accounts (real Binance Futures prices, fees and funding).">
+<style>
+:root{--bg:#f7f7f4;--card:#fcfcfb;--ink:#1d1f21;--muted:#666b70;--line:#e3e3de;--accent:#1f6feb;--pos:#1a7f37;--neg:#c62828;
+--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--other:#c9cbc6;--warn:#c47f00;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111315;--card:#1a1a19;--ink:#e8e8e6;--muted:#9aa0a6;--line:#2c3035;
+--accent:#58a6ff;--pos:#3fb950;--neg:#f2706b;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--other:#45474a;--warn:#e3a73a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111315;--card:#1a1a19;--ink:#e8e8e6;--muted:#9aa0a6;--line:#2c3035;--accent:#58a6ff;--pos:#3fb950;
+--neg:#f2706b;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--other:#45474a;--warn:#e3a73a;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:16px}
+h1{font-size:1.35rem;margin:.2rem 0}
+h2{font-size:1.05rem;margin:1.8rem 0 .6rem}
+.sub{color:var(--muted);font-size:.9rem;margin:0}
+.warn{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:8px;padding:10px 12px;margin:14px 0;font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px}
+.chart{height:320px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.readout{font-size:.82rem;color:var(--muted);min-height:1.3em;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.86rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--muted);font-weight:500;font-size:.78rem}
+td.num,th.num{text-align:right}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:color-mix(in srgb,var(--line) 45%,transparent)}
+tr.sel{outline:2px solid var(--s3);outline-offset:-2px}
+.pos{color:var(--pos)}.neg{color:var(--neg)}.muted{color:var(--muted)}
+a{color:var(--accent)}
+details{border-bottom:1px solid var(--line);padding:8px 0}
+details:last-child{border-bottom:0}
+summary{cursor:pointer;font-weight:500}
+details p{margin:.4rem 0;font-size:.88rem}
+code{font-size:.8rem;word-break:break-all}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:10px;padding:0 7px;font-size:.75rem;color:var(--muted);margin-left:4px}
+footer{color:var(--muted);font-size:.82rem;margin:2rem 0 1rem}
+button.theme{float:right;background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:3px 8px;font-size:.8rem}
+</style>
+</head>
+<body>
+<main>
+<button class="theme" id="theme" type="button" aria-label="Toggle theme">◐</button>
+<p class="sub"><a href="./">← Live track record</a></p>
+<h1>Strategy Lab</h1>
+<p class="sub" id="sub">Loading…</p>
+<div class="warn"><strong>Results under ~6 months are mostly noise.</strong> Twenty strategies, each with $1,000 of
+<strong>simulated</strong> money, run in parallel on the same 8 Binance Futures markets with real prices, fees (0.05%) and funding.
+Every strategy was <a href="LAB.md">pre-registered</a> with frozen code and parameters (SHA-256) <em>before</em> its forward test started;
+parameters are taken from the published sources, not optimized. Not investment advice.</div>
+
+<h2>Forward-test ranking (live data only)</h2>
+<div class="card tbl" id="rank"></div>
+<p class="sub" style="margin-top:6px">Ranked by return since each strategy's forward start. Return/DD = return divided by maximum drawdown.
+Trades = positions opened. Click a row to highlight its curve.</p>
+
+<h2>Forward-test equity</h2>
+<div class="card"><div class="readout" id="ro-f"></div><div class="chart" id="chart-f"></div>
+<div class="legend" id="lg-f"></div></div>
+
+<h2>Historical backtests (not live)</h2>
+<div class="warn">These are <strong>backtests, not live results</strong>: the same simulator run on 2023-12 → the day before registration.
+They prove nothing (the rules were known to have worked or not when they were chosen) and they are <strong>excluded from the ranking</strong>.
+t-stat = mean daily return / its standard error.</div>
+<div class="card tbl" id="bt"></div>
+<div class="card" style="margin-top:10px"><div class="readout" id="ro-b"></div><div class="chart" id="chart-b"></div>
+<div class="legend" id="lg-b"></div></div>
+
+<h2>The strategies</h2>
+<div class="card" id="list"></div>
+
+<footer>Raw data: <a href="data/lab.csv">lab.csv</a> (forward test, one row per strategy and day) ·
+<a href="data/lab_strategies.json">lab_strategies.json</a> (frozen list, parameters, hashes, start dates) ·
+<a href="data/lab_backtests.csv">lab_backtests.csv</a> (backtests, not live) · <a href="LAB.md">LAB.md</a> (pre-registration) ·
+<a href="https://github.com/peppa1514/trading-pilot-track-record/commits/main">git history (timestamped)</a>.
+Recomputed every night at 00:30 UTC, published at about 00:45 UTC.</footer>
+</main>
+<script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const nf = (x, d = 2) => Number(x).toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d});
+const sg = (x, d = 1, u = "%") => x == null || x === "" || isNaN(x) ? "—" : (x >= 0 ? "+" : "-") + nf(Math.abs(x), d) + u;
+const cls = x => x > 0 ? "pos" : x < 0 ? "neg" : "";
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const get = (u, f) => fetch(u, {cache: "no-cache"}).then(r => r.ok ? r[f]() : Promise.reject(u));
+function csv(text) {
+  const lines = text.trim().split(/\r?\n/), h = lines.shift().split(",");
+  return lines.filter(Boolean).map(l => Object.fromEntries(l.split(",").map((v, i) => [h[i], v])));
+}
+const FIXED = ["v1-books", "btc-hold"];              // toujours en couleur : le système en direct et la référence
+let selected = null, charts = [];
+
+function table(el, head, rows, empty, keys) {
+  const isNum = head.map(h => /^(Return|Max|Trades|Days|t-|CAGR)/.test(h));
+  $(el).innerHTML = rows.length ? `<table><thead><tr>${head.map((h, i) => `<th class="${isNum[i] ? "num" : ""}">${h}</th>`).join("")}</tr></thead><tbody>${
+    rows.map((r, k) => `<tr data-k="${esc(keys[k])}">${r.map((c, i) => `<td class="${isNum[i] ? "num" : ""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table>`
+    : `<p class="muted" style="margin:4px">${empty}</p>`;
+  $(el).querySelectorAll("tbody tr").forEach(tr => tr.onclick = () => select(tr.dataset.k));
+}
+function palette() {
+  const cs = getComputedStyle(document.documentElement), v = n => cs.getPropertyValue(n).trim();
+  return {bg: v("--card"), ink: v("--muted"), line: v("--line"), s1: v("--s1"), s2: v("--s2"), s3: v("--s3"), other: v("--other")};
+}
+function role(name) { return name === FIXED[0] ? "s1" : name === FIXED[1] ? "s2" : name === selected ? "s3" : "other"; }
+function paint() {
+  const c = palette();
+  charts.forEach(ch => {
+    ch.chart.applyOptions({layout: {background: {color: c.bg}, textColor: c.ink}, grid: {vertLines: {color: c.line}, horzLines: {color: c.line}}});
+    ch.series.forEach(({name, s}) => { const r = role(name); s.applyOptions({color: c[r], lineWidth: r === "other" ? 1 : 2}); });
+    const items = [[FIXED[0], "s1"], [FIXED[1], "s2"]].concat(selected && !FIXED.includes(selected) ? [[selected, "s3"]] : []);
+    $(ch.legend).innerHTML = items.map(([n, r]) => `<span><i style="background:var(--${r})"></i>${esc(TITLES[n] || n)}</span>`).join("")
+      + `<span><i style="background:var(--other)"></i>other strategies</span>`;
+  });
+  document.querySelectorAll("tr[data-k]").forEach(tr => tr.classList.toggle("sel", tr.dataset.k === selected));
+}
+function select(name) { selected = selected === name ? null : name; paint(); }
+let TITLES = {};
+function drawChart(el, ro, legend, rows) {
+  const by = {};
+  rows.forEach(r => (by[r.strategy] = by[r.strategy] || []).push({time: r.date, value: +r.value_usd}));
+  const names = Object.keys(by);
+  if (!window.LightweightCharts || !names.length || names.every(n => by[n].length < 2)) {
+    $(el).style.height = "auto";
+    $(el).innerHTML = '<p class="muted">No curve yet: the first values appear after the first full day of the forward test.</p>'; return;
+  }
+  const chart = LightweightCharts.createChart($(el), {autoSize: true, rightPriceScale: {borderVisible: false},
+    timeScale: {borderVisible: false}, crosshair: {mode: 0}, handleScroll: false, handleScale: false,
+    localization: {locale: "en-US", priceFormatter: p => "$" + nf(p, 0)}});
+  // gris d'abord, couleurs ensuite (dessinées par-dessus)
+  const order = names.filter(n => !FIXED.includes(n)).concat(FIXED.filter(n => by[n]));
+  const series = order.map(name => {
+    const s = chart.addLineSeries({lineWidth: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false});
+    s.setData(by[name]); return {name, s};
+  });
+  chart.subscribeCrosshairMove(p => {
+    if (!p || !p.time) { $(ro).textContent = ""; return; }
+    const shown = series.filter(x => role(x.name) !== "other");
+    $(ro).textContent = p.time + " · " + shown.map(x => { const d = p.seriesData.get(x.s); return d ? `${TITLES[x.name] || x.name} $${nf(d.value, 0)}` : null; })
+      .filter(Boolean).join(" · ");
+  });
+  chart.timeScale().fitContent();
+  charts.push({chart, series, legend});
+}
+
+Promise.all([get("data/lab_strategies.json", "json"), get("data/lab.csv", "text").then(csv), get("data/lab_backtests.csv", "text").then(csv)])
+.then(([doc, fwd, bts]) => {
+  const S = doc.strategies, active = S.filter(s => s.status === "active");
+  S.forEach(s => TITLES[s.name] = s.title);
+  const start = active.map(s => s.forward_start_utc).sort()[0] || "";
+  const days = Math.max(0, ...active.map(s => (s.forward || {}).days || 0));
+  $("sub").textContent = `${active.length} strategies · forward test since ${start.slice(0, 10)} (${days} full day${days === 1 ? "" : "s"}) · generated ${doc.generated_utc.replace("T", " ").slice(0, 16)} UTC`;
+  const rk = doc.ranking_forward.map(n => active.find(s => s.name === n)).filter(Boolean);
+  table("rank", ["#", "Strategy", "Return", "Max drawdown", "Return/DD", "Trades", "Days"],
+    rk.map((s, k) => { const f = s.forward || {};
+      return [k + 1, `${esc(s.title)}<span class="badge">${s.number}</span>`, `<span class="${cls(f.return_pct)}">${sg(f.return_pct, 2)}</span>`,
+              f.max_drawdown_pct == null ? "—" : nf(f.max_drawdown_pct, 2) + "%", f.return_to_drawdown == null ? "—" : nf(f.return_to_drawdown, 2),
+              f.trades ?? 0, f.days ?? 0]; }), "No strategy registered yet.", rk.map(s => s.name));
+  const bt = active.slice().sort((a, b) => a.number - b.number);
+  table("bt", ["#", "Strategy (backtest, not live)", "Return", "CAGR", "Max drawdown", "t-stat (daily)", "Trades", "Period"],
+    bt.map(s => { const b = s.backtest_not_live || {};
+      return [s.number, esc(s.title), `<span class="${cls(b.return_pct)}">${sg(b.return_pct, 1)}</span>`, sg(b.cagr_pct, 1),
+              b.max_drawdown_pct == null ? "—" : nf(b.max_drawdown_pct, 1) + "%", b.t_daily == null ? "—" : nf(b.t_daily, 2), b.trades ?? "—",
+              esc(b.period || "—")]; }), "No backtest yet.", bt.map(s => s.name));
+  const live = new Set(active.map(s => s.name + "|" + s.version));
+  drawChart("chart-f", "ro-f", "lg-f", fwd.filter(r => live.has(r.strategy + "|" + r.version)));
+  drawChart("chart-b", "ro-b", "lg-b", bts.filter(r => live.has(r.strategy + "|" + r.version)));
+  paint();
+  $("list").innerHTML = S.slice().sort((a, b) => a.number - b.number || a.version - b.version).map(s => `<details>
+    <summary>${s.number}. ${esc(s.title)} <span class="badge">${esc(s.name)} v${s.version}</span>${s.status !== "active" ? '<span class="badge">archived</span>' : ""}</summary>
+    <p>${esc(s.description)}</p><p class="muted">Source: ${esc(s.source)}</p>
+    <p class="muted">Registered ${esc((s.registered_utc || "").replace("T", " "))} · forward test from ${esc((s.forward_start_utc || "").replace("T", " "))}</p>
+    <p><code>${esc(JSON.stringify(s.params))}</code></p><p class="muted">SHA-256 <code>${esc(s.sha256)}</code></p>
+    ${s.check_vs_live_account ? `<p class="muted">Check against the live account (through ${esc(s.check_vs_live_account.through)}): same entries:
+      ${s.check_vs_live_account.same_entries ? "yes" : "no"}; max equity gap $${nf(s.check_vs_live_account.max_abs_equity_gap_usd || 0, 2)}
+      (${esc(s.check_vs_live_account.note)}).</p>` : ""}</details>`).join("");
+}).catch(e => { $("sub").textContent = "Data unavailable (" + e + ")."; });
+
+$("theme").onclick = () => {
+  const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("theme", document.documentElement.dataset.theme); } catch (e) {}
+  paint();
+};
+try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint);
+</script>
+</body>
+</html>
