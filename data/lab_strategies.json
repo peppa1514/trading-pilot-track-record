@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-14T21:24:14Z",
+ "generated_utc": "2026-10-15T00:45:03Z",
  "warning": "Results under ~6 months are mostly noise.",
  "notes": [
   "Values are at the daily close (24:00 UTC) of each date; the first row of each strategy is its starting capital at the close of the day before its forward start.",
@@ -112,11 +112,18 @@
     "return_to_drawdown": 0.92
    },
    "check_vs_live_account": {
-    "through": "2026-10-13",
-    "same_entries": true,
+    "through": "2026-10-14",
+    "same_entries": false,
     "only_lab": [],
-    "only_live": [],
-    "max_abs_equity_gap_usd": 6.32,
+    "only_live": [
+     [
+      "2026-10-14",
+      "SOLUSDT",
+      "B",
+      "long"
+     ]
+    ],
+    "max_abs_equity_gap_usd": 7.71,
     "note": "live day 0 started at 04:20 UTC; the lab enters at 00:01 UTC like the pilot does every other day"
    }
   },

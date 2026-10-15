@@ -1,32 +1,22 @@
 {
- "date": "2026-10-14",
- "jour": 5,
- "valeur": 991.3941162486333,
- "variation_pct": -0.8605883751366727,
- "valeur_actuelle": 997.0308333243793,
- "horodatage_valeur": "2026-10-14T00:00:00Z",
+ "date": "2026-10-15",
+ "jour": 6,
+ "valeur": 975.3064561658388,
+ "variation_pct": -2.4693543834161225,
+ "valeur_actuelle": 974.386435333205,
+ "horodatage_valeur": "2026-10-15T00:00:00Z",
  "pire_baisse_pct": -4.769469844803675,
  "positions_ouvertes": 6,
  "trades_fermes": 1,
  "references_pct": {
-  "btc_conserve": 0.7950995322672849,
-  "btc_eth_50_50": 0.44483317406522893,
-  "btc_ma200": 0.7950995322673071
+  "btc_conserve": -1.0070299276695338,
+  "btc_eth_50_50": -1.9859299438595324,
+  "btc_ma200": -1.0070299276695227
  },
  "statut": "alive",
  "vie": 1,
- "hier": [
-  {
-   "methode": "B",
-   "symbole": "SOLUSDT",
-   "sens": "long",
-   "net": -7.684866090344876,
-   "r": -1.023984522330183,
-   "fermeture": "2026-10-13T00:51:28Z",
-   "frais": 0.1043906433352052
-  }
- ],
- "genere_utc": "2026-10-14T00:45:03Z",
+ "hier": [],
+ "genere_utc": "2026-10-15T00:45:03Z",
  "depart_utc": "2026-10-09T04:20:19Z",
  "capital_depart": 1000.0,
  "cahier": "v1 (D v1, A v1, C v1, B v1; risk 0.75% per position)",
