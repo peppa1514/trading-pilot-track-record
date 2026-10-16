@@ -1,34 +1,28 @@
 <!-- genere-par-report.py -->
 # Crypto Pilot — public track record
 
-**Live page: https://peppa1514.github.io/trading-pilot-track-record/** · Repository: https://github.com/peppa1514/trading-pilot-track-record · X: [@CryptoPilotBot](https://x.com/CryptoPilotBot)
+**→ Live account: https://peppa1514.github.io/trading-pilot-track-record/**  
+**→ The lab (20 strategies side by side): https://peppa1514.github.io/trading-pilot-track-record/lab.html**  
+Repository: https://github.com/peppa1514/trading-pilot-track-record · X: [@CryptoPilotBot](https://x.com/CryptoPilotBot)
 
-**What this is.** The daily, public, timestamped track record of a **mechanical** trading system on crypto perpetual futures
-(8 Binance Futures markets: BTC, ETH, SOL, BNB, XRP, DOGE, ADA, AVAX), started on **2026-10-09 at 04:20 UTC** with
-**$1,000 of simulated money**.
+**What is this?** A computer program trades 8 cryptocurrencies with **pretend money** ($1,000 from 9 Oct 2026), but at real market
+prices and with real fees. **No AI decides anything**: it follows fixed rules written in advance. Everything is published here every
+day, losses included. **This is not investment advice**, nor a signal to copy, and nothing here promises any profit.
 
-**What this is not.**
-- **The money is SIMULATED (paper trading).** No order reaches an exchange. **Prices, fees (0.05%) and funding rates are real**
-  (Binance); slippage is simulated.
-- **This is not investment advice**, nor an offer, nor a signal to copy. Nothing here promises any profit.
-
-**How it decides.** The rules come from three books: Andreas Clenow (50-day breakout, method A), Rachid Kabbaj (pullback with
-reward/risk ≥ 3, method B), Van K. Tharp (channel breakout, method C; 3R swing, method D). Fixed risk of 0.75% of the account per
-position, ATR-based stops. The code applies the rules on its own, with no manual exceptions. **No AI decides any trade**: 6 language
-models were tested as a "veto" on 300 historical signals and none did better than simply taking every signal
-([AI veto study](docs/ai-veto-study.md)). An AI is only used to
-propose research hypotheses, which the code tests on historical data and then on a shadow portfolio before any adoption.
-
-**Honesty.** The rules in force are published (`data/resume.json`; each report states the rulebook version). Losses, failures and
-technical incidents are published too. Three benchmarks are always shown alongside: BTC buy & hold, 50/50 BTC-ETH, and BTC with a
-200-day moving-average filter. In backtests over 2023-12 → 2026-10, this system returned **less** than holding BTC (+16.5% vs +122%)
-with a much smaller maximum drawdown (14% vs 53%). Live trading will show what it is really worth.
-
-**Strategy Lab.** Next to the live system, 20 strategies (variants of the pilot and well-known published rules: buy & hold,
-200-day filter, Turtle systems, time-series and cross-sectional momentum, RSI(2), Bollinger, Fear & Greed, volatility targeting)
-run in parallel on simulated $1,000 accounts with the same prices, fees and funding. They were **pre-registered** with frozen code
-and parameters ([LAB.md](LAB.md), SHA-256 per strategy) and are ranked **only on data after their registration**
-([lab.html](lab.html)); historical backtests are shown separately and labelled "not live". Results under ~6 months are mostly noise.
+**In a bit more detail.**
+- The money is simulated: no order reaches an exchange. Prices, fees (0.05%) and funding are real (Binance Futures, 8 markets: BTC,
+  ETH, SOL, BNB, XRP, DOGE, ADA, AVAX); slippage is simulated.
+- The rules come from three trading books: Andreas Clenow (method A, buy a 50-day high in a rising market), Thami Kabbaj (method B,
+  buy a dip in a rising trend, target three times the risk), Van K. Tharp (method C, buy a 20-day high; method D, buy a new high after
+  a short pullback, target three times the risk). Each trade risks 0.75% of the account; the code applies the rules with no exceptions.
+- Why no AI: 6 language models were tested as a filter on 300 past signals, and none did better than taking every signal
+  ([AI veto study](docs/ai-veto-study.md)). An AI only proposes research ideas, which the code tests before anything changes.
+- Honesty: on past prices (Dec 2023 → Oct 2026) these rules made **+13%**, while just holding bitcoin made **+78%** (same fees and
+  funding), with a much smaller worst dip (14% vs 61%). That is modest; only the live record will tell what it is worth. Three simple
+  alternatives are always shown next to the account: just holding bitcoin, 50/50 bitcoin-ether, and bitcoin with a 200-day rule.
+- The lab: 20 other ways of trading the same 8 cryptos, each with its own simulated $1,000, all started on 15 Oct 2026. Their rules
+  were published before day 1 ([LAB.md](LAB.md), one SHA-256 fingerprint per strategy) and nothing is tuned afterwards. Under 3 months
+  of data, the ranking is mostly luck; under 6 months, treat it as a hint.
 
 **Goal.** 12 months of verifiable history, without interruption. The git history (one commit per day, timestamped by GitHub) makes any
 rewrite visible. On the 1st of each month, the report publishes the SHA-256 hashes of the previous month's files.

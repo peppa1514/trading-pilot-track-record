@@ -1,9 +1,16 @@
 {
  "date": "2026-10-16",
  "jour": 7,
+ "jour0": "2026-10-09",
  "valeur": 973.5483851767477,
  "variation_pct": -2.645161482325231,
- "valeur_actuelle": 975.0260135227693,
+ "variation_usd": -26.45161482325227,
+ "references_usd": {
+  "btc_conserve": 996.7640227096501,
+  "btc_eth_50_50": 987.661099666607,
+  "btc_ma200": 996.7640227096502
+ },
+ "valeur_actuelle": 977.5176316493244,
  "horodatage_valeur": "2026-10-16T00:00:00Z",
  "pire_baisse_pct": -6.566178547648239,
  "positions_ouvertes": 6,
@@ -23,10 +30,227 @@
    "net": -8.118623374374828,
    "r": -1.083203265155007,
    "fermeture": "2026-10-15T02:24:32Z",
-   "frais": 0.13354209478828924
+   "frais": 0.13354209478828924,
+   "ouverture": "2026-10-10T00:00:44Z",
+   "type_sortie": "stop_loss"
   }
  ],
- "genere_utc": "2026-10-16T00:45:03Z",
+ "positions": [
+  {
+   "symbole": "BTCUSDT",
+   "marche": "BTC",
+   "sens": "long",
+   "methode": "B",
+   "ouverture_utc": "2026-10-09T04:20:27Z",
+   "jours_ouverte": 7.1,
+   "entree": 82482.03528966798,
+   "quantite": 0.0022178162718411304,
+   "stop": 79096.29999999999,
+   "si_stop_usd": -7.508938817572422,
+   "objectif": 92622.7,
+   "si_objectif_usd": 22.490131201859462,
+   "stop_suiveur": false,
+   "prix_actuel": 82270.83,
+   "pnl_latent_usd": -0.4684145281245689,
+   "r_latent": -0.062380922192145846,
+   "risque_initial_usd": 7.508938817572422
+  },
+  {
+   "symbole": "BNBUSDT",
+   "marche": "BNB",
+   "sens": "long",
+   "methode": "B",
+   "ouverture_utc": "2026-10-09T04:20:28Z",
+   "jours_ouverte": 7.1,
+   "entree": 742.4194673338524,
+   "quantite": 0.2031331432371823,
+   "stop": 705.4614,
+   "si_stop_usd": -7.507408385496856,
+   "objectif": 853.1358,
+   "si_objectif_usd": 22.490156662168094,
+   "stop_suiveur": false,
+   "prix_actuel": 732.13,
+   "pnl_latent_usd": -2.090131841761742,
+   "r_latent": -0.2784092371742493,
+   "risque_initial_usd": 7.507408385496856
+  },
+  {
+   "symbole": "XRPUSDT",
+   "marche": "XRP",
+   "sens": "long",
+   "methode": "B",
+   "ouverture_utc": "2026-10-09T04:20:28Z",
+   "jours_ouverte": 7.1,
+   "entree": 1.3971712271122732,
+   "quantite": 65.25327621327676,
+   "stop": 1.28216415,
+   "si_stop_usd": -7.504588569288776,
+   "objectif": 1.74190755,
+   "si_objectif_usd": 22.49517449814221,
+   "stop_suiveur": false,
+   "prix_actuel": 1.3433,
+   "pnl_latent_usd": -3.515274062705328,
+   "r_latent": -0.4684166267410016,
+   "risque_initial_usd": 7.504588569288776
+  },
+  {
+   "symbole": "AVAXUSDT",
+   "marche": "AVAX",
+   "sens": "long",
+   "methode": "B",
+   "ouverture_utc": "2026-10-09T04:20:28Z",
+   "jours_ouverte": 7.1,
+   "entree": 10.272862423529412,
+   "quantite": 6.926988512667319,
+   "stop": 9.18936,
+   "si_stop_usd": -7.505408841235435,
+   "objectif": 13.51992,
+   "si_objectif_usd": 22.49233053218115,
+   "stop_suiveur": false,
+   "prix_actuel": 10.173,
+   "pnl_latent_usd": -0.6917458606353578,
+   "r_latent": -0.09216631302412732,
+   "risque_initial_usd": 7.505408841235435
+  },
+  {
+   "symbole": "SOLUSDT",
+   "marche": "SOL",
+   "sens": "long",
+   "methode": "B",
+   "ouverture_utc": "2026-10-14T00:00:14Z",
+   "jours_ouverte": 2.3,
+   "entree": 106.7953696785506,
+   "quantite": 0.9685813187533306,
+   "stop": 99.11303000000001,
+   "si_stop_usd": -7.440970696961569,
+   "objectif": 129.82091,
+   "si_objectif_usd": 22.302108209557446,
+   "stop_suiveur": false,
+   "prix_actuel": 106.53,
+   "pnl_latent_usd": -0.2570321132076862,
+   "r_latent": -0.034542820241536785,
+   "risque_initial_usd": 7.440970696961569
+  },
+  {
+   "symbole": "ETHUSDT",
+   "marche": "ETH",
+   "sens": "long",
+   "methode": "B",
+   "ouverture_utc": "2026-10-16T00:00:00Z",
+   "jours_ouverte": 0.3,
+   "entree": 2441.132665478924,
+   "quantite": 0.04996451103409031,
+   "stop": 2294.89485,
+   "si_stop_usd": -7.306700945097958,
+   "objectif": 2879.35545,
+   "si_objectif_usd": 21.89558715259308,
+   "stop_suiveur": false,
+   "prix_actuel": 2458.97,
+   "pnl_latent_usd": 0.8912336974970477,
+   "r_latent": 0.12197484257173184,
+   "risque_initial_usd": 7.306700945097958
+  }
+ ],
+ "derniers_trades": [
+  {
+   "symbole": "ETHUSDT",
+   "marche": "ETH",
+   "sens": "long",
+   "methode": "B",
+   "ouverture_utc": "2026-10-10T00:00:44Z",
+   "fermeture_utc": "2026-10-15T02:24:32Z",
+   "jours": 5.1,
+   "pnl_usd": -8.118623374374828,
+   "r": -1.083203265155007,
+   "type_sortie": "stop_loss"
+  },
+  {
+   "symbole": "SOLUSDT",
+   "marche": "SOL",
+   "sens": "long",
+   "methode": "B",
+   "ouverture_utc": "2026-10-09T04:20:27Z",
+   "fermeture_utc": "2026-10-13T00:51:28Z",
+   "jours": 3.9,
+   "pnl_usd": -7.684866090344876,
+   "r": -1.023984522330183,
+   "type_sortie": "stop_loss"
+  }
+ ],
+ "tendances": {
+  "marches": [
+   {
+    "symbole": "BTCUSDT",
+    "tendance": "up",
+    "prix": 82270.8,
+    "moyenne_200j": 75390.6,
+    "sous_moyenne_200j": false
+   },
+   {
+    "symbole": "ETHUSDT",
+    "tendance": "up",
+    "prix": 2458.97,
+    "moyenne_200j": 2313.67,
+    "sous_moyenne_200j": false
+   },
+   {
+    "symbole": "SOLUSDT",
+    "tendance": "up",
+    "prix": 106.53,
+    "moyenne_200j": 96.9294,
+    "sous_moyenne_200j": false
+   },
+   {
+    "symbole": "BNBUSDT",
+    "tendance": "up",
+    "prix": 732.13,
+    "moyenne_200j": 690.798,
+    "sous_moyenne_200j": false
+   },
+   {
+    "symbole": "XRPUSDT",
+    "tendance": "none",
+    "prix": 1.3433,
+    "moyenne_200j": 1.37362,
+    "sous_moyenne_200j": true
+   },
+   {
+    "symbole": "DOGEUSDT",
+    "tendance": "none",
+    "prix": 0.08243,
+    "moyenne_200j": 0.0904,
+    "sous_moyenne_200j": true
+   },
+   {
+    "symbole": "ADAUSDT",
+    "tendance": "none",
+    "prix": 0.2312,
+    "moyenne_200j": 0.23322,
+    "sous_moyenne_200j": true
+   },
+   {
+    "symbole": "AVAXUSDT",
+    "tendance": "up",
+    "prix": 10.173,
+    "moyenne_200j": 8.83573,
+    "sous_moyenne_200j": false
+   }
+  ],
+  "en_baisse": [],
+  "en_hausse": [
+   "BTCUSDT",
+   "ETHUSDT",
+   "SOLUSDT",
+   "BNBUSDT",
+   "AVAXUSDT"
+  ],
+  "sous_moyenne_200j": [
+   "XRPUSDT",
+   "DOGEUSDT",
+   "ADAUSDT"
+  ]
+ },
+ "genere_utc": "2026-10-16T07:20:29Z",
  "depart_utc": "2026-10-09T04:20:19Z",
  "capital_depart": 1000.0,
  "cahier": "v1 (D v1, A v1, C v1, B v1; risk 0.75% per position)",

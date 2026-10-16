@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-16T00:45:03Z",
+ "generated_utc": "2026-10-16T07:20:29Z",
  "warning": "Results under ~6 months are mostly noise.",
  "notes": [
   "Values are at the daily close (24:00 UTC) of each date; the first row of each strategy is its starting capital at the close of the day before its forward start.",
@@ -36,6 +36,22 @@
    "version": 1,
    "title": "Pilot v1 (live rules)",
    "kind": "pilot",
+   "plain_name": "Our live rules (all 4 methods)",
+   "plain_description": "Exactly the rules of the live account: four trend-following methods taken from three trading books, risking 0.75% of the money on each trade.",
+   "holds_now": [
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BNBUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    }
+   ],
    "description": "The live pilot's rulebook v1: the 4 book methods (D > A > C > B), 0.75% risk per position, 5% total open-risk cap, one position per market. Should match the live account up to small execution differences.",
    "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007)",
    "params": {
@@ -141,6 +157,9 @@
    "version": 1,
    "title": "Pilot v1, methods D+C only",
    "kind": "pilot",
+   "plain_name": "Our rules, methods D+C only",
+   "plain_description": "Our live rules, but only the two methods (D and C) that did best in past tests, to see if that still holds on new data.",
+   "holds_now": [],
    "description": "Pilot v1 restricted to methods D (Tharp 3R swing) and C (Tharp channel breakout). Pre-registered hypothesis #65.",
    "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); hypothesis from PLAN §12.6 bis (observed in backtest, so it must be judged on new data)",
    "params": {
@@ -219,6 +238,22 @@
    "version": 1,
    "title": "Pilot v1, longs only",
    "kind": "pilot",
+   "plain_name": "Our rules, buying only",
+   "plain_description": "Our live rules, but it never bets on a fall: signals to sell short are ignored.",
+   "holds_now": [
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BNBUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    }
+   ],
    "description": "Pilot v1, but short signals are ignored.",
    "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007)",
    "params": {
@@ -309,6 +344,9 @@
    "version": 1,
    "title": "Pilot v1, D+C longs only",
    "kind": "pilot",
+   "plain_name": "Our rules, D+C, buying only",
+   "plain_description": "Only methods D and C, and only bets that prices will rise.",
+   "holds_now": [],
    "description": "Pilot v1 restricted to methods D and C, long signals only.",
    "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007)",
    "params": {
@@ -387,6 +425,22 @@
    "version": 1,
    "title": "Pilot v1, max 3 same side",
    "kind": "pilot",
+   "plain_name": "Our rules, at most 3 bets the same way",
+   "plain_description": "Our live rules, but never more than 3 trades betting in the same direction at once, because cryptos tend to move together.",
+   "holds_now": [
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BNBUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    }
+   ],
    "description": "Pilot v1 with at most 3 open positions in the same direction (crypto markets are highly correlated).",
    "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); correlation limit in the spirit of the Turtle rules (C. Faith, 'Way of the Turtle', 2007)",
    "params": {
@@ -478,6 +532,22 @@
    "version": 1,
    "title": "Pilot v1, BTC 200-day regime",
    "kind": "pilot",
+   "plain_name": "Our rules, following bitcoin's trend",
+   "plain_description": "Our live rules, but it only buys while bitcoin is above its 200-day average price, and only sells short while bitcoin is below it.",
+   "holds_now": [
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BNBUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    }
+   ],
    "description": "Pilot v1; new longs only when BTC closes above its 200-day moving average, new shorts only when it closes below.",
    "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); 200-day regime filter: M. Faber, 'A Quantitative Approach to Tactical Asset Allocation' (2007)",
    "params": {
@@ -568,6 +638,22 @@
    "version": 1,
    "title": "Pilot v1, funding filter",
    "kind": "pilot",
+   "plain_name": "Our rules, avoiding crowded trades",
+   "plain_description": "Our live rules, but it skips a trade when too many traders are already betting the same way (seen in the fee they pay each other to stay in).",
+   "holds_now": [
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BNBUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    }
+   ],
    "description": "Pilot v1; no new long when the market's 3-day average funding rate is above +0.03% per 8 h, no new short when it is below -0.03% (avoid crowded trades).",
    "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); funding as a crowding signal: Binance Futures funding rates (baseline 0.01% per 8 h)",
    "params": {
@@ -659,6 +745,22 @@
    "version": 1,
    "title": "Pilot v1, half risk in high DVOL",
    "kind": "pilot",
+   "plain_name": "Our rules, half size in a panic",
+   "plain_description": "Our live rules, but it bets half as much when the options market expects unusually big bitcoin swings.",
+   "holds_now": [
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BNBUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    }
+   ],
    "description": "Pilot v1; risk per position is halved when BTC implied volatility (Deribit DVOL) is above its 90th percentile of the past year.",
    "source": "Pilot rulebook v1 (PLAN §12.2): rules from A. Clenow, 'Following the Trend' (2013), Kabbaj, 'L'art du trading' (Eyrolles) and V. K. Tharp, 'Trade Your Way to Financial Freedom' (2007); implied volatility index: Deribit DVOL; risk scaling as in A. Clenow, 'Following the Trend' (2013)",
    "params": {
@@ -755,6 +857,14 @@
    "version": 1,
    "title": "BTC buy & hold",
    "kind": "lab",
+   "plain_name": "Just hold bitcoin",
+   "plain_description": "Buys bitcoin once with all the money and never sells. The simplest possible benchmark.",
+   "holds_now": [
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    }
+   ],
    "description": "Buy BTC perpetual once with 100% of the capital and hold it (funding paid or received like any position).",
    "source": "Standard benchmark",
    "params": {
@@ -814,6 +924,42 @@
    "version": 1,
    "title": "Equal-weight basket of 8",
    "kind": "lab",
+   "plain_name": "Hold all 8 cryptos equally",
+   "plain_description": "Puts 1/8 of the money in each of the 8 cryptos and evens the amounts out once a month.",
+   "holds_now": [
+    {
+     "symbol": "ADAUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BNBUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "DOGEUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "SOLUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "XRPUSDT",
+     "side": "long"
+    }
+   ],
    "description": "1/8 of the capital in each of the 8 markets, rebalanced to equal weights on the first day of each month.",
    "source": "Equal-weight (1/N) allocation: V. DeMiguel, L. Garlappi & R. Uppal, Review of Financial Studies (2009)",
    "params": {},
@@ -870,6 +1016,14 @@
    "version": 1,
    "title": "BTC 200-day MA filter",
    "kind": "lab",
+   "plain_name": "Bitcoin with the 200-day rule",
+   "plain_description": "Holds bitcoin while its price is above its average of the last 200 days, and stays in cash otherwise.",
+   "holds_now": [
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    }
+   ],
    "description": "Hold BTC while its daily close is above its 200-day simple moving average, cash otherwise.",
    "source": "M. Faber, 'A Quantitative Approach to Tactical Asset Allocation', Journal of Wealth Management (2007)",
    "params": {
@@ -929,6 +1083,42 @@
    "version": 1,
    "title": "Golden cross 50/200",
    "kind": "lab",
+   "plain_name": "Golden cross",
+   "plain_description": "Holds each crypto while its 50-day average price is above its 200-day average, and stays in cash for that coin otherwise.",
+   "holds_now": [
+    {
+     "symbol": "ADAUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BNBUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "DOGEUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "SOLUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "XRPUSDT",
+     "side": "long"
+    }
+   ],
    "description": "On each of the 8 markets: long (1/8 of the capital) while the 50-day moving average is above the 200-day one, flat otherwise. Long only.",
    "source": "Moving-average crossover rules: W. Brock, J. Lakonishok & B. LeBaron, Journal of Finance (1992); J. Murphy, 'Technical Analysis of the Financial Markets' (1999)",
    "params": {
@@ -988,6 +1178,9 @@
    "version": 1,
    "title": "Turtle System 1 (20/10)",
    "kind": "lab",
+   "plain_name": "Turtle traders, fast version",
+   "plain_description": "Buys at a 20-day high or sells short at a 20-day low, and gets out when the price turns back past its 10-day low or high. Rules of the famous 1980s \"Turtle\" traders.",
+   "holds_now": [],
    "description": "Long on a close above the 20-day high, short on a close below the 20-day low; exit on the 10-day opposite channel; stop at 2 N (N = 20-day ATR); 1 unit = 1% of equity per N. Skips a breakout if the previous one was a winner (unless it is also a 55-day breakout). Simplified: entries at the next open, one unit, no pyramiding.",
    "source": "C. Faith, 'Way of the Turtle' (2007) and 'The Original Turtle Trading Rules' (2003)",
    "params": {
@@ -1052,6 +1245,9 @@
    "version": 1,
    "title": "Turtle System 2 (55/20)",
    "kind": "lab",
+   "plain_name": "Turtle traders, slow version",
+   "plain_description": "The same idea with longer windows: gets in at a 55-day high or low, and out at a 20-day reversal.",
+   "holds_now": [],
    "description": "Long on a close above the 55-day high, short below the 55-day low; exit on the 20-day opposite channel; stop at 2 N; 1% of equity per N. Same simplifications as System 1.",
    "source": "C. Faith, 'Way of the Turtle' (2007) and 'The Original Turtle Trading Rules' (2003)",
    "params": {
@@ -1116,6 +1312,42 @@
    "version": 1,
    "title": "Time-series momentum",
    "kind": "lab",
+   "plain_name": "Hold what has been rising",
+   "plain_description": "Once a month, holds the cryptos whose price went up over the past 1, 3 and 12 months, putting less money in the wilder ones.",
+   "holds_now": [
+    {
+     "symbol": "ADAUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BNBUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "DOGEUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "SOLUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "XRPUSDT",
+     "side": "long"
+    }
+   ],
    "description": "Each month, on each of the 8 markets: long if past returns are positive (average of the 1-, 3- and 12-month signs), cash otherwise, each position scaled to 40% annualized volatility (capped at 1x), 1/8 of the capital per market.",
    "source": "T. Moskowitz, Y. H. Ooi & L. H. Pedersen, 'Time Series Momentum', Journal of Financial Economics (2012); long-only, multi-horizon variant",
    "params": {
@@ -1181,6 +1413,18 @@
    "version": 1,
    "title": "Cross-sectional momentum",
    "kind": "lab",
+   "plain_name": "Back the 2 best performers",
+   "plain_description": "Every Monday, holds the 2 cryptos that rose the most over the last 4 weeks, but only while bitcoin is above its 200-day average.",
+   "holds_now": [
+    {
+     "symbol": "ADAUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "AVAXUSDT",
+     "side": "long"
+    }
+   ],
    "description": "Every Monday: long the 2 best of the 8 markets over the past 4 weeks (50% each), only while BTC is above its 200-day moving average; cash otherwise.",
    "source": "N. Jegadeesh & S. Titman, Journal of Finance (1993); for crypto: Y. Liu, A. Tsyvinski & X. Wu, 'Common Risk Factors in Cryptocurrency', Journal of Finance (2022)",
    "params": {
@@ -1243,6 +1487,9 @@
    "version": 1,
    "title": "Connors RSI(2)",
    "kind": "lab",
+   "plain_name": "Buy sharp 2-day drops",
+   "plain_description": "Buys a crypto after a sharp 2-day drop when its long-term trend is up, and sells as soon as it bounces back. No stop-loss.",
+   "holds_now": [],
    "description": "On each market: buy (1/8 of the capital) when the 2-day RSI is below 10 and the close is above the 200-day moving average; sell when the close is above the 5-day moving average. Long only, no stop.",
    "source": "L. Connors & C. Alvarez, 'Short Term Trading Strategies That Work' (2008)",
    "params": {
@@ -1304,6 +1551,9 @@
    "version": 1,
    "title": "Bollinger mean reversion",
    "kind": "lab",
+   "plain_name": "Buy unusually low prices",
+   "plain_description": "Buys when the price falls unusually far below its 20-day average in a long-term uptrend, and sells when it comes back to the average. No stop-loss.",
+   "holds_now": [],
    "description": "On each market: buy (1/8 of the capital) on a close below the lower Bollinger band (20 days, 2 standard deviations) while the close is above the 200-day moving average; sell at the middle band. Long only, no stop.",
    "source": "J. Bollinger, 'Bollinger on Bollinger Bands' (2001)",
    "params": {
@@ -1364,6 +1614,9 @@
    "version": 1,
    "title": "Fear & Greed contrarian",
    "kind": "lab",
+   "plain_name": "Buy fear, sell greed",
+   "plain_description": "Buys bitcoin when a popular mood index shows extreme fear, and sells it when the index shows extreme greed.",
+   "holds_now": [],
    "description": "Buy BTC (100%) when the Crypto Fear & Greed Index is below 20 (extreme fear), sell when it is above 80 (extreme greed).",
    "source": "alternative.me Crypto Fear & Greed Index; contrarian rule 'be fearful when others are greedy' (W. Buffett, 1986 letter)",
    "params": {
@@ -1424,6 +1677,14 @@
    "version": 1,
    "title": "BTC volatility targeting",
    "kind": "lab",
+   "plain_name": "Bitcoin, less when it is wild",
+   "plain_description": "Holds bitcoin, but less of it when the price has been swinging a lot over the last 30 days, and more when it is calm.",
+   "holds_now": [
+    {
+     "symbol": "BTCUSDT",
+     "side": "long"
+    }
+   ],
    "description": "BTC exposure = 40% / realized 30-day annualized volatility, capped at 100%; rebalanced daily when the exposure is more than 5 points away from target.",
    "source": "A. Moreira & T. Muir, 'Volatility-Managed Portfolios', Journal of Finance (2017); C. Harvey et al., 'The Impact of Volatility Targeting', Journal of Portfolio Management (2018)",
    "params": {

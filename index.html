@@ -3,151 +3,294 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Crypto Pilot — public track record</title>
-<meta name="description" content="Daily, public and verifiable track record of a mechanical trading system on a simulated account (real Binance Futures prices and fees).">
+<title>Crypto Pilot</title>
+<meta name="description" content="A program trades crypto with pretend money at real prices and fees. No AI decides. Everything is published every day, losses included.">
 <style>
-:root{--bg:#f7f7f4;--card:#fff;--ink:#1d1f21;--muted:#666b70;--line:#e3e3de;--accent:#1f6feb;--pos:#1a7f37;--neg:#c62828;
---r1:#c47f00;--r2:#8250df;--r3:#7a8691;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111315;--card:#1a1d20;--ink:#e8e8e6;--muted:#9aa0a6;--line:#2c3035;
---accent:#58a6ff;--pos:#3fb950;--neg:#f2706b;--r1:#e3a73a;--r2:#b392f0;--r3:#8b949e;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#111315;--card:#1a1d20;--ink:#e8e8e6;--muted:#9aa0a6;--line:#2c3035;--accent:#58a6ff;--pos:#3fb950;
---neg:#f2706b;--r1:#e3a73a;--r2:#b392f0;--r3:#8b949e;color-scheme:dark}
+:root{--bg:#f6f6f3;--card:#fff;--ink:#1c1e21;--muted:#62676d;--line:#e2e2dc;--accent:#1f6feb;--pos:#1a7f37;--neg:#c62828;
+--warn:#b06d00;--s1:#1f6feb;--s2:#e8702a;--s3:#8250df;--s4:#7a8691;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111315;--card:#1a1d20;--ink:#ebebe8;--muted:#9ba1a7;--line:#2d3136;
+--accent:#6aaeff;--pos:#45c463;--neg:#f2706b;--warn:#e3a73a;--s1:#5aa2ff;--s2:#f08a4b;--s3:#b392f0;--s4:#8b949e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111315;--card:#1a1d20;--ink:#ebebe8;--muted:#9ba1a7;--line:#2d3136;--accent:#6aaeff;--pos:#45c463;
+--neg:#f2706b;--warn:#e3a73a;--s1:#5aa2ff;--s2:#f08a4b;--s3:#b392f0;--s4:#8b949e;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:960px;margin:0 auto;padding:16px}
-h1{font-size:1.35rem;margin:.2rem 0}
-h2{font-size:1.05rem;margin:1.6rem 0 .6rem}
-.sub{color:var(--muted);font-size:.9rem;margin:0}
-.warn{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--r1);border-radius:8px;padding:10px 12px;margin:14px 0;font-size:.9rem}
-.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-@media (min-width:640px){.kpis{grid-template-columns:repeat(4,1fr)}}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
-.kpi .l{color:var(--muted);font-size:.78rem}
-.kpi .v{font-size:1.25rem;font-weight:600;font-variant-numeric:tabular-nums}
-.kpi .s{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px}
-#chart{height:300px}
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;color:var(--muted);margin-top:8px}
-.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
-.tbl{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:.86rem;font-variant-numeric:tabular-nums}
-th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
-th{color:var(--muted);font-weight:500;font-size:.78rem}
-.pos{color:var(--pos)}.neg{color:var(--neg)}.muted{color:var(--muted)}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:12px 16px 32px}
+header{display:flex;align-items:center;gap:8px;margin:4px 0 10px}
+header h1{font-size:1.15rem;margin:0;flex:1}
+nav.top{font-size:.9rem;margin-bottom:6px}
+nav.top a{margin-right:14px}
+h2{font-size:1.05rem;margin:0 0 .5rem}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+p{margin:.45rem 0}
+.muted{color:var(--muted)}.small{font-size:.86rem}
+.pos{color:var(--pos)}.neg{color:var(--neg)}
+.big{font-size:2.6rem;font-weight:750;letter-spacing:-.5px;line-height:1.1;font-variant-numeric:tabular-nums;margin:.2rem 0}
+.change{font-size:1.1rem;font-weight:600}
+.compare{border-left:4px solid var(--s2);padding:6px 10px;margin:10px 0;background:color-mix(in srgb,var(--s2) 8%,transparent);border-radius:0 8px 8px 0}
+#chart{height:260px;margin:6px -6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem;margin-top:8px}
+.legend i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.legend .dash{background:none!important;border-top:3px dotted}
+.item{border-top:1px solid var(--line);padding:10px 0}
+.item:first-of-type{border-top:0;padding-top:4px}
+.item b{font-weight:650}
+.tag{display:inline-block;font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:0 6px;margin-left:4px;vertical-align:1px}
+ul.methods{padding-left:0;list-style:none;margin:.4rem 0}
+ul.methods li{margin:.45rem 0}
+ul.methods b{display:inline-block;min-width:5.6em}
+details{border-top:1px solid var(--line);padding:8px 0}
+details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:.35rem 0 .2rem}
+.honest{border-left:4px solid var(--warn)}
+.links a{display:inline-block;margin:3px 14px 3px 0}
 a{color:var(--accent)}
-footer{color:var(--muted);font-size:.82rem;margin:2rem 0 1rem}
-button.theme{float:right;background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:3px 8px;font-size:.8rem}
+footer{color:var(--muted);font-size:.82rem;margin:18px 2px}
+button.theme{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:3px 9px;font-size:.85rem;cursor:pointer}
 </style>
 </head>
 <body>
 <main>
-<button class="theme" id="theme" type="button" aria-label="Toggle theme">◐</button>
-<h1>Crypto Pilot — public track record</h1>
-<p class="sub" id="sub">Loading…</p>
-<div class="warn"><strong>SIMULATED account</strong>: no real money. Real Binance Futures prices and fees. Mechanical system (rules from the books
-of Clenow, Tharp and Kabbaj): no AI makes any trading decision. This is not investment advice. <a href="https://github.com/peppa1514/trading-pilot-track-record#readme">Read the README</a> ·
-<a href="lab.html">Strategy Lab</a>: 20 other strategies forward-tested side by side.</div>
+<header><h1>Crypto Pilot</h1><button class="theme" id="theme" type="button" aria-label="Switch light or dark">◐</button></header>
+<nav class="top"><a href="./">Live account</a><a href="lab.html">The lab (20 strategies)</a><a href="https://github.com/peppa1514/trading-pilot-track-record">Data &amp; code history</a></nav>
 
-<div class="kpis" id="kpis"></div>
+<section>
+<h2>What is this?</h2>
+<p>A computer program trades 8 cryptocurrencies with <b>pretend money</b>, but at real market prices and with real fees.
+<b>No AI decides anything</b>: it follows fixed rules written in advance. Everything is published here every day, losses included.
+<span class="muted">This is not investment advice.</span></p>
+</section>
 
-<h2>Account value and benchmarks</h2>
-<div class="card"><div id="chart"></div>
-<div class="legend"><span><i style="background:var(--accent)"></i>This system</span><span><i style="background:var(--r1)"></i>BTC buy &amp; hold</span>
-<span><i style="background:var(--r2)"></i>50/50 BTC-ETH</span><span><i style="background:var(--r3)"></i>BTC with 200-day MA filter</span></div>
-<p class="sub" style="margin-top:6px">Value at each midnight UTC, starting from $1,000 of simulated money. Benchmarks start with the same capital at the same time.</p></div>
+<section>
+<h2>The account today</h2>
+<div class="big" id="value">…</div>
+<div class="change" id="change"></div>
+<p class="muted small" id="started"></p>
+<p class="compare" id="btc"></p>
+<p id="dip"></p>
+</section>
 
-<h2 id="pos-title">Open positions</h2>
-<div class="card tbl" id="positions"></div>
+<section>
+<h2>The account over time</h2>
+<div id="chart"></div>
+<div class="legend">
+<span><i style="background:var(--s1);height:4px"></i>This program</span>
+<span><i class="dash" style="border-color:var(--s2)"></i>Just holding bitcoin</span>
+<span><i class="dash" style="border-color:var(--s3)"></i>50/50 bitcoin-ether</span>
+<span><i class="dash" style="border-color:var(--s4)"></i>Bitcoin with a simple 200-day rule</span>
+</div>
+<p class="muted small">Value of $1,000 at each midnight (UTC), for the program and for three simple alternatives started the same day.
+The "200-day rule" holds bitcoin only while its price is above its average of the last 200 days.</p>
+</section>
 
-<h2>Latest closed trades</h2>
-<div class="card tbl" id="trades"></div>
+<section>
+<h2 id="hold-title">What it is holding right now</h2>
+<div id="holding"><p class="muted">Loading…</p></div>
+<p class="muted small" id="hold-note"></p>
+</section>
 
-<h2>By method (in R)</h2>
-<div class="card tbl" id="methods"></div>
+<section>
+<h2>What happened recently</h2>
+<div id="recent"><p class="muted">Loading…</p></div>
+</section>
 
-<footer>Raw data: <a href="data/equity.csv">equity.csv</a> · <a href="data/trades.csv">trades.csv</a> · <a href="data/positions.csv">positions.csv</a> ·
-<a href="data/resume.json">resume.json</a> · <a href="https://github.com/peppa1514/trading-pilot-track-record/tree/main/reports">daily reports</a> ·
-<a href="https://github.com/peppa1514/trading-pilot-track-record/commits/main">git history (timestamped)</a> · <a href="https://github.com/peppa1514/trading-pilot-track-record/blob/main/docs/ai-veto-study.md">AI veto study</a> ·
-<a href="lab.html">Strategy Lab</a> (20 pre-registered strategies, forward-tested). Updated daily at about 00:45 UTC. Not investment advice.</footer>
+<section>
+<h2>How it decides (plain words)</h2>
+<p>Once a day, after the daily price closes, the program checks each crypto. If one of its four methods sees a signal, it opens a trade
+with a <b>stop-loss</b> (a price at which it accepts a small loss and gets out).</p>
+<ul class="methods">
+<li><b>Method A</b> buys when the price closes at its highest level of the last 50 days in a rising market, and stays in as long as the trend lasts. <span class="muted small">(Andreas Clenow)</span></li>
+<li><b>Method B</b> buys a dip inside a rising trend, with a stop-loss below and a target three times further than the risk. <span class="muted small">(Thami Kabbaj)</span></li>
+<li><b>Method C</b> buys when the price closes above its highest point of the last 20 days, and lets the stop-loss follow the price up. <span class="muted small">(Van K. Tharp)</span></li>
+<li><b>Method D</b> waits for a short pullback in a rising trend, buys when the price makes a new 20-day high, and aims for three times the risk. <span class="muted small">(Van K. Tharp)</span></li>
+</ul>
+<p>Each trade risks <b>0.75% of the account</b> (about $7.50), and never more than 5% is at risk in total. One trade per crypto at a time.</p>
+<p>The same methods can also <b>sell short</b> (bet on a fall), mirror-image. Methods A, B and D only do it in a downtrend:
+price below its 200-day average (for B and D, the shorter averages must point down too). Method C can also sell short when the price breaks below its 20-day low.</p>
+<p id="trend"></p>
+</section>
+
+<section>
+<h2>Words used on this page</h2>
+<details><summary>R (the result unit)</summary><p>1R is the amount a trade risks when it opens (about $7.50 here). A trade that ends at −1R lost what it planned to risk;
++3R means it won three times that amount. It lets you compare trades of different sizes.</p></details>
+<details><summary>Stop-loss</summary><p>A price fixed in advance at which the program accepts a loss and gets out, so one bad trade cannot do much damage.</p></details>
+<details><summary>Take-profit (target)</summary><p>A price fixed in advance at which the program takes its gain and gets out.</p></details>
+<details><summary>Drawdown (dip)</summary><p>How far the account has fallen from its highest point. A −6% dip means it went down 6% from a peak before (maybe) recovering.</p></details>
+<details><summary>Long / short</summary><p><b>Long</b> = buy, and gain if the price rises. <b>Short</b> = "sell short": borrow and sell, then buy back later, which gains if the price falls.</p></details>
+<details><summary>Funding</summary><p>The program trades "perpetual futures", contracts that follow the price of a crypto. Every 8 hours, buyers and sellers of these
+contracts pay each other a small fee called funding. It is counted in the results.</p></details>
+<details><summary>Backtest vs live</summary><p>A <b>backtest</b> replays rules on past prices. It is easy to fool yourself with it, because you already know the past.
+<b>Live</b> results come from prices that did not exist when the rules were fixed: only those really count.</p></details>
+<details><summary>Why simulated?</summary><p>To build an honest, public, day-by-day record first, without risking anyone's money. Prices, fees and funding are real
+(Binance Futures); no order is sent to an exchange.</p></details>
+</section>
+
+<section class="honest">
+<h2>Honesty box</h2>
+<p id="bt">In a test on past prices, these rules made far less than simply holding bitcoin.</p>
+<p>Published failures: we tested 6 AI models as a filter on 300 past trade signals, and none did better than simply taking every signal
+(<a href="https://github.com/peppa1514/trading-pilot-track-record/blob/main/docs/ai-veto-study.md">AI veto study</a>). That is why no AI decides here.
+Every losing trade stays in the data.</p>
+<p class="links">
+<a href="https://github.com/peppa1514/trading-pilot-track-record/tree/main/reports">Daily reports</a>
+<a href="data/equity.csv">Account data (CSV)</a>
+<a href="data/trades.csv">All trades (CSV)</a>
+<a href="data/positions.csv">Open positions (CSV)</a>
+<a href="data/resume.json">Summary (JSON)</a>
+<a href="https://github.com/peppa1514/trading-pilot-track-record/blob/main/docs/ai-veto-study.md">AI veto study</a>
+<a href="lab.html">The lab</a>
+<a href="https://github.com/peppa1514/trading-pilot-track-record/commits/main">Timestamped history</a>
+</p>
+</section>
+
+<footer id="foot">Updated every day at about 00:45 UTC. Simulated money. Not investment advice.</footer>
 </main>
 <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
 <script>
+"use strict";
 const $ = id => document.getElementById(id);
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const ok = x => x !== null && x !== undefined && x !== "" && !isNaN(x);
 const nf = (x, d = 2) => Number(x).toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d});
-const sg = (x, d = 1, u = "%") => x == null || x === "" || isNaN(x) ? "—" : (x >= 0 ? "+" : "-") + nf(Math.abs(x), d) + u;
-const usd = (x, d = 2, signed = false) => x == null || x === "" || isNaN(x) ? "—" : (x < 0 ? "-" : signed ? "+" : "") + "$" + nf(Math.abs(x), d);
-const meth = m => m === "autre" ? "other" : m === "total" ? "Total" : m;
+const money = (x, d = 2) => ok(x) ? (x < 0 && nf(Math.abs(x), d) !== nf(0, d) ? "−" : "") + "$" + nf(Math.abs(x), d) : "—";
+const smoney = (x, d = 2) => ok(x) ? (x < 0 && nf(Math.abs(x), d) !== nf(0, d) ? "−" : "+") + "$" + nf(Math.abs(x), d) : "—";
+const spct = (x, d = 1) => ok(x) ? (x < 0 && nf(Math.abs(x), d) !== nf(0, d) ? "−" : "+") + nf(Math.abs(x), d) + "%" : "—";
+const sR = x => ok(x) ? (x < 0 && nf(Math.abs(x), 1) !== nf(0, 1) ? "−" : "+") + nf(Math.abs(x), 1) + "R" : null;
+const price = x => !ok(x) ? "—" : "$" + (x >= 1000 ? nf(x, 0) : x >= 10 ? nf(x, 2) : x >= 1 ? nf(x, 3) : Number(Number(x).toPrecision(4)).toString());
 const cls = x => x > 0 ? "pos" : x < 0 ? "neg" : "";
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const coin = s => esc(String(s || "").replace(/USDT$/, ""));
+const day = s => { const d = new Date(s); return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`; };
+const date = s => { const d = new Date(s); return `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`; };
+const days = n => n < 1 ? `${Math.max(1, Math.round(n * 24))} hour${Math.round(n * 24) === 1 ? "" : "s"}` : `${Math.round(n)} day${Math.round(n) === 1 ? "" : "s"}`;
+const listing = a => a.length <= 1 ? a.join("") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
+const get = (u, f) => fetch(u, {cache: "no-cache"}).then(r => r.ok ? r[f]() : Promise.reject(new Error(u)));
 function csv(text) {
   const lines = text.trim().split(/\r?\n/), h = lines.shift().split(",");
   return lines.filter(Boolean).map(l => Object.fromEntries(l.split(",").map((v, i) => [h[i], v])));
 }
-const get = (u, f) => fetch(u, {cache: "no-cache"}).then(r => r.ok ? r[f]() : Promise.reject(u));
-const dt = s => s ? s.replace("T", " ").replace(/:\d\dZ$/, "") : "—";
 
-function table(el, head, rows, empty) {
-  $(el).innerHTML = rows.length ? `<table><thead><tr>${head.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${
-    rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table>` : `<p class="muted" style="margin:4px">${empty}</p>`;
+// ---------- one position = a few plain sentences
+function positionText(p) {
+  const long = p.sens === "long", m = coin(p.symbole);
+  let t = long ? `<b>Bought ${m}</b> at ${price(p.entree)} on ${day(p.ouverture_utc)}.`
+               : `<b>Sold ${m} short</b> at ${price(p.entree)} on ${day(p.ouverture_utc)}: a bet that its price will fall.`;
+  const parts = [];
+  if (ok(p.stop)) {
+    const move = long ? "falls" : "rises", act = long ? "sell" : "buy back";
+    parts.push(p.si_stop_usd < 0
+      ? `${act} at a loss if the price ${move} to ${price(p.stop)} (${smoney(p.si_stop_usd)})`
+      : `${act} if the price ${move === "falls" ? "falls back" : "rises back"} to ${price(p.stop)}, keeping a gain of ${smoney(p.si_stop_usd)}`);
+  }
+  if (ok(p.objectif)) parts.push(`take its profit at ${price(p.objectif)} (${smoney(p.si_objectif_usd)})`);
+  if (parts.length) t += ` It will ${parts.join(", or ")}.`;
+  else t += " It has no stop-loss.";
+  if (!ok(p.objectif)) t += " There is no fixed target: it stays in while the trend lasts.";
+  if (p.stop_suiveur) t += ` The stop-loss ${long ? "moves up as the price rises" : "moves down as the price falls"}.`;
+  const r = sR(p.r_latent);
+  t += ` Now ${price(p.prix_actuel)}: currently <span class="${cls(p.pnl_latent_usd)}">${smoney(p.pnl_latent_usd)}</span>${r ? ` (${r})` : ""}.`;
+  return t + `<span class="tag">method ${esc(p.methode === "autre" ? "other" : p.methode)}</span>`;
 }
 
-let chart, series = [];
-function colors() {
+// ---------- one closed trade = one sentence
+const EXIT = {stop_loss: "stopped out", take_profit: "reached its target", trailing_stop: "closed by its trailing stop",
+              time_stop: "closed at its time limit", method_exit: "closed by its exit rule", liquidation: "liquidated"};
+function tradeText(t) {
+  const verb = EXIT[t.type_sortie] || "closed", r = sR(t.r);
+  const res = t.pnl_usd < 0 ? `at a loss of ${money(Math.abs(t.pnl_usd))}` : `with a gain of ${money(t.pnl_usd)}`;
+  return `<b>${date(t.fermeture_utc)}</b> — ${coin(t.symbole)} (${t.sens === "long" ? "bought" : "sold short"}): ${verb} ` +
+         `<span class="${cls(t.pnl_usd)}">${res}${r ? ` (${r})` : ""}</span> after ${days(t.jours)}.`;
+}
+
+function trendText(tr, positions) {
+  if (!tr || !tr.marches || !tr.marches.length) return "";
+  const n = tr.marches.length, down = (tr.en_baisse || []).map(coin), below = (tr.sous_moyenne_200j || []).map(coin);
+  const shorts = positions.filter(p => p.sens === "short").map(p => coin(p.symbole));
+  const held = shorts.length ? ` Short positions now: ${listing(shorts)}.` : "";
+  if (!down.length && !below.length)
+    return `<b>Right now no market is in a downtrend</b> (none of the ${n} is below its 200-day average), so ` +
+           (shorts.length ? `shorts can only come from method C.${held}` : "there are no short positions.");
+  if (!down.length)
+    return `<b>Right now no market is in a clear downtrend</b>, but ${below.length} of ${n} ${below.length > 1 ? "are" : "is"} below the 200-day average (${listing(below)}).` +
+           (held || " No short position for now.");
+  return `<b>Right now ${down.length} of ${n} markets ${down.length > 1 ? "are" : "is"} in a downtrend</b> (${listing(down)}), so the program may sell ` +
+         `${down.length > 1 ? "them" : "it"} short.` + (held || " No short position for now.");
+}
+
+// ---------- chart
+let chart = null, series = [];
+function palette() {
   const cs = getComputedStyle(document.documentElement), v = n => cs.getPropertyValue(n).trim();
-  return {bg: v("--card"), ink: v("--muted"), line: v("--line"), s: [v("--accent"), v("--r1"), v("--r2"), v("--r3")]};
+  return {bg: v("--card"), ink: v("--muted"), line: v("--line"), s: [v("--s1"), v("--s2"), v("--s3"), v("--s4")]};
 }
 function paint() {
   if (!chart) return;
-  const c = colors();
-  chart.applyOptions({layout: {background: {color: c.bg}, textColor: c.ink}, grid: {vertLines: {color: c.line}, horzLines: {color: c.line}}});
+  const c = palette();
+  chart.applyOptions({layout: {background: {color: c.bg}, textColor: c.ink}, grid: {vertLines: {visible: false}, horzLines: {color: c.line}}});
   series.forEach((s, i) => s.applyOptions({color: c.s[i]}));
 }
 function drawChart(eq) {
-  if (!window.LightweightCharts || !eq.length) { $("chart").innerHTML = '<p class="muted">Chart unavailable.</p>'; return; }
+  if (!window.LightweightCharts || eq.length < 2) { $("chart").style.height = "auto"; $("chart").innerHTML = '<p class="muted">The chart appears after the first full day.</p>'; return; }
   chart = LightweightCharts.createChart($("chart"), {autoSize: true, rightPriceScale: {borderVisible: false},
-    timeScale: {borderVisible: false, timeVisible: false}, crosshair: {mode: 0}, handleScroll: false, handleScale: false,
-    localization: {locale: "en-US", priceFormatter: p => "$" + nf(p, 0)}});
+    timeScale: {borderVisible: false, timeVisible: false, tickMarkFormatter: t => day(t * 1000)}, crosshair: {mode: 0},
+    handleScroll: false, handleScale: false, localization: {locale: "en-US", priceFormatter: p => "$" + nf(p, 0), timeFormatter: t => date(t * 1000)}});
   const keys = ["compte_usd", "btc_conserve_usd", "btc_eth_50_50_usd", "btc_ma200_usd"];
-  series = keys.map((k, i) => chart.addLineSeries({lineWidth: i ? 2 : 3, lineStyle: i ? 2 : 0, priceLineVisible: false,
-    lastValueVisible: i === 0, crosshairMarkerVisible: true}));
+  series = keys.map((k, i) => chart.addLineSeries({lineWidth: i ? 2 : 3, lineStyle: i ? 2 : 0, priceLineVisible: false, lastValueVisible: i === 0}));
   keys.forEach((k, i) => series[i].setData(eq.map(r => ({time: Math.floor(Date.parse(r.horodatage_utc) / 1000), value: +r[k]}))));
   paint();
   chart.timeScale().fitContent();
 }
 
-Promise.all([get("data/resume.json", "json"), get("data/equity.csv", "text").then(csv),
-             get("data/positions.csv", "text").then(csv), get("data/trades.csv", "text").then(csv)])
-.then(([r, eq, pos, tr]) => {
-  $("sub").textContent = `Day ${r.jour} of stage 1 (started ${dt(r.depart_utc)} UTC) · rulebook ${r.cahier} · report generated ${dt(r.genere_utc)} UTC`;
-  const ref = r.references_pct || {};
-  $("kpis").innerHTML = [
-    ["Simulated account", usd(r.valeur), `<span class="${cls(r.variation_pct)}">${sg(r.variation_pct, 2)}</span> since start`],
-    ["Max drawdown", sg(r.pire_baisse_pct, 2), "peak to subsequent low"],
-    ["BTC buy & hold", `<span class="${cls(ref.btc_conserve)}">${sg(ref.btc_conserve, 2)}</span>`, `50/50: ${sg(ref.btc_eth_50_50, 2)} · MA200 filter: ${sg(ref.btc_ma200, 2)}`],
-    ["Positions", `${r.positions_ouvertes} open`, `${r.trades_fermes} closed since start`],
-  ].map(([l, v, s]) => `<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+function render(r, eq, lab) {
+  const s0 = r.capital_depart, refs = r.references_usd || {}, refp = r.references_pct || {};
+  $("value").textContent = money(r.valeur);
+  $("change").innerHTML = `<span class="${cls(r.variation_usd)}">${smoney(r.variation_usd)} (${spct(r.variation_pct)})</span> <span class="muted" style="font-weight:400">since the start</span>`;
+  $("started").textContent = `Started with ${money(s0, 0)} on ${date(r.depart_utc)} · today is day ${r.jour} · value at ${date(r.horodatage_valeur || r.genere_utc)}, 00:00 UTC`;
+  if (ok(refs.btc_conserve)) {
+    const diff = r.valeur - refs.btc_conserve;
+    $("btc").innerHTML = `If you had simply bought bitcoin on day 0, you would have <b>${money(refs.btc_conserve)}</b> today (${spct(refp.btc_conserve)}). ` +
+      (Math.abs(diff) < 0.5 ? "The program is level with it." : `The program is <b>${money(Math.abs(diff))} ${diff > 0 ? "ahead of" : "behind"}</b> that.`);
+  } else $("btc").remove();
+  $("dip").innerHTML = ok(r.pire_baisse_pct) && r.pire_baisse_pct < -0.05
+    ? `The worst dip so far: <b class="neg">${spct(r.pire_baisse_pct)}</b> from a peak.` : "No dip from a peak so far.";
   drawChart(eq);
-  $("pos-title").textContent = `Open positions (${pos.length})`;
-  table("positions", ["Market", "Side", "Method", "Opened (UTC)", "Entry", "Stop", "Price", "Unrealized", "R"],
-    pos.map(p => [esc(p.symbole.replace("USDT", "")), esc(p.sens), esc(meth(p.methode)), dt(p.ouverture_utc), esc(p.prix_entree), esc(p.stop || "—"),
-                  esc(p.prix_actuel), `<span class="${cls(+p.pnl_latent_usd)}">${usd(+p.pnl_latent_usd, 2, true)}</span>`,
-                  p.r_latent === "" ? "—" : `<span class="${cls(+p.r_latent)}">${sg(+p.r_latent, 2, "")}</span>`]), "No open position.");
-  table("trades", ["Closed (UTC)", "Market", "Side", "Method", "R", "Net P&L", "Exit"],
-    tr.slice(-20).reverse().map(t => [dt(t.fermeture_utc), esc(t.symbole.replace("USDT", "")), esc(t.sens), esc(meth(t.methode)),
-      t.r === "" ? "—" : `<span class="${cls(+t.r)}">${sg(+t.r, 2, "")}</span>`,
-      `<span class="${cls(+t.pnl_net_usd)}">${usd(+t.pnl_net_usd, 2, true)}</span>`, esc(String(t.type_sortie).replace(/_/g, " "))]),
-    "No closed trade yet: the methods follow trends lasting several days or weeks.");
-  table("methods", ["Method", "Positions", "Win rate", "Expectancy", "Total", "t"],
-    (r.par_methode || []).map(m => [esc(meth(m.methode)), m.positions, nf(m.reussite_pct, 0) + "%",
-      m.esperance_R == null ? "—" : sg(m.esperance_R, 3, " R"), sg(m.total_R, 2, " R"), m.t == null ? "—" : nf(m.t, 2)]),
-    "No closed position yet.");
-}).catch(e => { $("sub").textContent = "Data unavailable (" + e + ")."; });
+  const pos = r.positions || [];
+  $("hold-title").textContent = pos.length ? `What it is holding right now (${pos.length})` : "What it is holding right now";
+  if (pos.length) {
+    const tot = pos.reduce((a, p) => a + (+p.pnl_latent_usd || 0), 0);
+    const risk = pos.reduce((a, p) => a + Math.min(0, ok(p.si_stop_usd) ? +p.si_stop_usd : 0), 0);
+    $("holding").innerHTML = `<p>${pos.length} open trade${pos.length > 1 ? "s" : ""}, together <span class="${cls(tot)}">${smoney(tot)}</span> right now. ` +
+      `If every stop-loss were hit, the account would lose about ${money(Math.abs(risk))}.</p>` +
+      pos.map(p => `<div class="item">${positionText(p)}</div>`).join("");
+    $("hold-note").textContent = `Prices as of ${date(r.genere_utc)}, ${r.genere_utc.slice(11, 16)} UTC. Amounts are before the small exit fee.`;
+  } else $("holding").innerHTML = "<p>Nothing: all the money is in cash, waiting for a signal.</p>";
+  const tr = r.derniers_trades || [];
+  $("recent").innerHTML = tr.length ? tr.map(t => `<div class="item">${tradeText(t)}</div>`).join("") +
+    `<p class="muted small">${r.trades_fermes} trade${r.trades_fermes === 1 ? "" : "s"} closed since the start. Full list: <a href="data/trades.csv">trades.csv</a>.</p>`
+    : "<p>No trade closed yet: the methods follow trends that last days or weeks.</p>";
+  $("trend").innerHTML = trendText(r.tendances, pos);
+  const S = lab && lab.strategies || [], me = S.find(s => s.name === "v1-books" && s.status === "active"), bh = S.find(s => s.name === "btc-hold" && s.status === "active");
+  const a = me && me.backtest_not_live, b = bh && bh.backtest_not_live;
+  if (a && b && ok(a.return_pct) && ok(b.return_pct)) {
+    const [p0, p1] = String(a.period || "").split(/\s*→\s*/);
+    $("bt").innerHTML = `In a test on past prices${p0 && p1 ? ` (${date(p0)} → ${date(p1)})` : ""}, these rules made <b>${spct(a.return_pct)}</b>, ` +
+      `while just holding bitcoin made <b>${spct(b.return_pct)}</b> (same fees and funding). The rules' worst dip was ${nf(a.max_drawdown_pct, 0)}%, ` +
+      `against ${nf(b.max_drawdown_pct, 0)}% for bitcoin. That is modest, and a test on past prices proves little: only the live record will tell.`;
+  }
+  $("foot").textContent = `Last update: ${date(r.genere_utc)}, ${r.genere_utc.slice(11, 16)} UTC (every day at about 00:45 UTC). Simulated money. Not investment advice.`;
+}
 
-const btn = $("theme");
-btn.onclick = () => {
-  const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-  document.documentElement.dataset.theme = dark ? "light" : "dark";
-  try { localStorage.setItem("theme", document.documentElement.dataset.theme); } catch (e) {}
+Promise.all([get("data/resume.json", "json"), get("data/equity.csv", "text").then(csv), get("data/lab_strategies.json", "json").catch(() => null)])
+  .then(([r, eq, lab]) => render(r, eq, lab))
+  .catch(e => { $("value").textContent = "—"; $("change").textContent = "Data unavailable right now (" + e.message + ")."; });
+
+$("theme").onclick = () => {
+  const el = document.documentElement;
+  const dark = el.dataset.theme ? el.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  el.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("theme", el.dataset.theme); } catch (e) {}
   paint();
 };
 try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
