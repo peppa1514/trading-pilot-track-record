@@ -1,22 +1,32 @@
 {
- "date": "2026-10-15",
- "jour": 6,
- "valeur": 975.3064561658388,
- "variation_pct": -2.4693543834161225,
- "valeur_actuelle": 974.386435333205,
- "horodatage_valeur": "2026-10-15T00:00:00Z",
- "pire_baisse_pct": -4.769469844803675,
+ "date": "2026-10-16",
+ "jour": 7,
+ "valeur": 973.5483851767477,
+ "variation_pct": -2.645161482325231,
+ "valeur_actuelle": 975.0260135227693,
+ "horodatage_valeur": "2026-10-16T00:00:00Z",
+ "pire_baisse_pct": -6.566178547648239,
  "positions_ouvertes": 6,
- "trades_fermes": 1,
+ "trades_fermes": 2,
  "references_pct": {
-  "btc_conserve": -1.0070299276695338,
-  "btc_eth_50_50": -1.9859299438595324,
-  "btc_ma200": -1.0070299276695227
+  "btc_conserve": -0.3235977290349856,
+  "btc_eth_50_50": -1.2338900333393021,
+  "btc_ma200": -0.3235977290349745
  },
  "statut": "alive",
  "vie": 1,
- "hier": [],
- "genere_utc": "2026-10-15T00:45:03Z",
+ "hier": [
+  {
+   "methode": "B",
+   "symbole": "ETHUSDT",
+   "sens": "long",
+   "net": -8.118623374374828,
+   "r": -1.083203265155007,
+   "fermeture": "2026-10-15T02:24:32Z",
+   "frais": 0.13354209478828924
+  }
+ ],
+ "genere_utc": "2026-10-16T00:45:03Z",
  "depart_utc": "2026-10-09T04:20:19Z",
  "capital_depart": 1000.0,
  "cahier": "v1 (D v1, A v1, C v1, B v1; risk 0.75% per position)",
@@ -73,23 +83,23 @@
  "par_methode": [
   {
    "methode": "B",
-   "positions": 1,
+   "positions": 2,
    "reussite_pct": 0.0,
-   "esperance_R": -1.023984522330183,
-   "total_R": -1.023984522330183,
-   "t": null,
-   "pnl": -7.684866090344876,
-   "frais": 0.1043906433352052
+   "esperance_R": -1.0535938937425948,
+   "total_R": -2.1071877874851896,
+   "t": -35.583122622486194,
+   "pnl": -15.803489464719704,
+   "frais": 0.23793273812349444
   },
   {
    "methode": "total",
-   "positions": 1,
+   "positions": 2,
    "reussite_pct": 0.0,
-   "esperance_R": -1.023984522330183,
-   "total_R": -1.023984522330183,
-   "t": null,
-   "pnl": -7.684866090344876,
-   "frais": 0.1043906433352052
+   "esperance_R": -1.0535938937425948,
+   "total_R": -2.1071877874851896,
+   "t": -35.583122622486194,
+   "pnl": -15.803489464719704,
+   "frais": 0.23793273812349444
   }
  ]
 }
