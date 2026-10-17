@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-16T07:20:29Z",
+ "generated_utc": "2026-10-17T00:45:03Z",
  "warning": "Results under ~6 months are mostly noise.",
  "notes": [
   "Values are at the daily close (24:00 UTC) of each date; the first row of each strategy is its starting capital at the close of the day before its forward start.",
@@ -7,26 +7,26 @@
   "Backtests are NOT live results and are excluded from the ranking."
  ],
  "ranking_forward": [
-  "btc-hold",
-  "btc-ma200",
-  "btc-voltarget",
-  "basket-8",
-  "golden-cross",
-  "tsmom",
-  "v1-books",
-  "v1-long",
-  "v1-max3",
-  "v1-regime",
-  "v1-funding",
-  "v1-fear",
-  "xs-momentum",
   "v1-dc",
   "v1-dc-long",
   "turtle-s1",
   "turtle-s2",
   "rsi2",
   "bollinger-mr",
-  "fear-greed"
+  "fear-greed",
+  "btc-hold",
+  "btc-ma200",
+  "btc-voltarget",
+  "v1-max3",
+  "tsmom",
+  "v1-books",
+  "v1-long",
+  "v1-regime",
+  "v1-funding",
+  "v1-fear",
+  "basket-8",
+  "golden-cross",
+  "xs-momentum"
  ],
  "leader_rule_min_days": 30,
  "strategies": [
@@ -49,6 +49,14 @@
     },
     {
      "symbol": "BTCUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "SOLUSDT",
      "side": "long"
     }
    ],
@@ -96,21 +104,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
-    "fees": 0.21,
-    "final": 1001.02,
-    "trades": 3,
-    "funding": -0.02,
+    "days": 2,
+    "fees": 0.32,
+    "final": 995.08,
+    "trades": 5,
+    "funding": -0.09,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.1,
+    "return_pct": -0.49,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
-    "open_positions": 3,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "open_positions": 5,
+    "max_drawdown_pct": 0.59,
+    "return_to_drawdown": -0.83
    },
    "backtest_not_live": {
     "days": 1048,
@@ -136,9 +144,16 @@
     "return_to_drawdown": 0.92
    },
    "check_vs_live_account": {
-    "through": "2026-10-15",
+    "through": "2026-10-16",
     "same_entries": false,
-    "only_lab": [],
+    "only_lab": [
+     [
+      "2026-10-16",
+      "SOLUSDT",
+      "B",
+      "long"
+     ]
+    ],
     "only_live": [
      [
       "2026-10-14",
@@ -192,7 +207,7 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.0,
     "final": 1000.0,
     "trades": 0,
@@ -252,6 +267,14 @@
     {
      "symbol": "BTCUSDT",
      "side": "long"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "SOLUSDT",
+     "side": "long"
     }
    ],
    "description": "Pilot v1, but short signals are ignored.",
@@ -298,21 +321,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
-    "fees": 0.21,
-    "final": 1001.02,
-    "trades": 3,
-    "funding": -0.02,
+    "days": 2,
+    "fees": 0.32,
+    "final": 995.08,
+    "trades": 5,
+    "funding": -0.09,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.1,
+    "return_pct": -0.49,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
-    "open_positions": 3,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "open_positions": 5,
+    "max_drawdown_pct": 0.59,
+    "return_to_drawdown": -0.83
    },
    "backtest_not_live": {
     "days": 1048,
@@ -379,7 +402,7 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.0,
     "final": 1000.0,
     "trades": 0,
@@ -486,21 +509,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.21,
-    "final": 1001.02,
+    "final": 997.17,
     "trades": 3,
-    "funding": -0.02,
+    "funding": -0.07,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.1,
+    "return_pct": -0.28,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
     "open_positions": 3,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "max_drawdown_pct": 0.38,
+    "return_to_drawdown": -0.74
    },
    "backtest_not_live": {
     "days": 1048,
@@ -545,6 +568,14 @@
     },
     {
      "symbol": "BTCUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "SOLUSDT",
      "side": "long"
     }
    ],
@@ -592,21 +623,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
-    "fees": 0.21,
-    "final": 1001.02,
-    "trades": 3,
-    "funding": -0.02,
+    "days": 2,
+    "fees": 0.32,
+    "final": 995.08,
+    "trades": 5,
+    "funding": -0.09,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.1,
+    "return_pct": -0.49,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
-    "open_positions": 3,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "open_positions": 5,
+    "max_drawdown_pct": 0.59,
+    "return_to_drawdown": -0.83
    },
    "backtest_not_live": {
     "days": 1048,
@@ -651,6 +682,14 @@
     },
     {
      "symbol": "BTCUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "SOLUSDT",
      "side": "long"
     }
    ],
@@ -699,21 +738,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
-    "fees": 0.21,
-    "final": 1001.02,
-    "trades": 3,
-    "funding": -0.02,
+    "days": 2,
+    "fees": 0.32,
+    "final": 995.08,
+    "trades": 5,
+    "funding": -0.09,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.1,
+    "return_pct": -0.49,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
-    "open_positions": 3,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "open_positions": 5,
+    "max_drawdown_pct": 0.59,
+    "return_to_drawdown": -0.83
    },
    "backtest_not_live": {
     "days": 1048,
@@ -758,6 +797,14 @@
     },
     {
      "symbol": "BTCUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "side": "long"
+    },
+    {
+     "symbol": "SOLUSDT",
      "side": "long"
     }
    ],
@@ -811,21 +858,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
-    "fees": 0.21,
-    "final": 1001.02,
-    "trades": 3,
-    "funding": -0.02,
+    "days": 2,
+    "fees": 0.32,
+    "final": 995.08,
+    "trades": 5,
+    "funding": -0.09,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.1,
+    "return_pct": -0.49,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
-    "open_positions": 3,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "open_positions": 5,
+    "max_drawdown_pct": 0.59,
+    "return_to_drawdown": -0.83
    },
    "backtest_not_live": {
     "days": 1048,
@@ -878,21 +925,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.5,
-    "final": 1006.1,
+    "final": 998.21,
     "trades": 1,
-    "funding": -0.08,
+    "funding": -0.25,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.61,
+    "return_pct": -0.18,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
     "open_positions": 1,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "max_drawdown_pct": 0.78,
+    "return_to_drawdown": -0.23
    },
    "backtest_not_live": {
     "days": 1048,
@@ -970,21 +1017,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.5,
-    "final": 1002.07,
+    "final": 991.49,
     "trades": 8,
-    "funding": -0.05,
+    "funding": -0.2,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.21,
+    "return_pct": -0.85,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
     "open_positions": 8,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "max_drawdown_pct": 1.06,
+    "return_to_drawdown": -0.81
    },
    "backtest_not_live": {
     "days": 1048,
@@ -1037,21 +1084,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.5,
-    "final": 1006.1,
+    "final": 998.21,
     "trades": 1,
-    "funding": -0.08,
+    "funding": -0.25,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.61,
+    "return_pct": -0.18,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
     "open_positions": 1,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "max_drawdown_pct": 0.78,
+    "return_to_drawdown": -0.23
    },
    "backtest_not_live": {
     "days": 1048,
@@ -1132,21 +1179,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.5,
-    "final": 1002.07,
+    "final": 991.49,
     "trades": 8,
-    "funding": -0.05,
+    "funding": -0.2,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.21,
+    "return_pct": -0.85,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
     "open_positions": 8,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "max_drawdown_pct": 1.06,
+    "return_to_drawdown": -0.81
    },
    "backtest_not_live": {
     "days": 1048,
@@ -1199,7 +1246,7 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.0,
     "final": 1000.0,
     "trades": 0,
@@ -1266,7 +1313,7 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.0,
     "final": 1000.0,
     "trades": 0,
@@ -1367,21 +1414,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.2,
-    "final": 1001.08,
+    "final": 996.96,
     "trades": 8,
-    "funding": -0.02,
+    "funding": -0.07,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.11,
+    "return_pct": -0.3,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
     "open_positions": 8,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "max_drawdown_pct": 0.41,
+    "return_to_drawdown": -0.74
    },
    "backtest_not_live": {
     "days": 1048,
@@ -1441,21 +1488,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.5,
-    "final": 1000.79,
+    "final": 986.9,
     "trades": 2,
-    "funding": -0.04,
+    "funding": -0.23,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.08,
+    "return_pct": -1.31,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
     "open_positions": 2,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "max_drawdown_pct": 1.39,
+    "return_to_drawdown": -0.94
    },
    "backtest_not_live": {
     "days": 1048,
@@ -1505,7 +1552,7 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.0,
     "final": 1000.0,
     "trades": 0,
@@ -1568,7 +1615,7 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.0,
     "final": 1000.0,
     "trades": 0,
@@ -1631,7 +1678,7 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.0,
     "final": 1000.0,
     "trades": 0,
@@ -1701,21 +1748,21 @@
    "archived_utc": null,
    "origin": "catalog",
    "forward": {
-    "days": 1,
+    "days": 2,
     "fees": 0.5,
-    "final": 1006.1,
+    "final": 998.21,
     "trades": 1,
-    "funding": -0.08,
+    "funding": -0.25,
     "t_daily": null,
     "cagr_pct": null,
     "t_trades": null,
-    "return_pct": 0.61,
+    "return_pct": -0.18,
     "expectancy_R": null,
     "closed_trades": 0,
     "restated_days": 0,
     "open_positions": 1,
-    "max_drawdown_pct": 0.0,
-    "return_to_drawdown": null
+    "max_drawdown_pct": 0.78,
+    "return_to_drawdown": -0.23
    },
    "backtest_not_live": {
     "days": 1048,
