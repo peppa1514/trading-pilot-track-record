@@ -1,3 +1,4 @@
 id,position,vie,symbole,sens,methode,ouverture_utc,fermeture_utc,prix_entree,prix_sortie,quantite,r,pnl_net_usd,frais_usd,funding_usd,type_sortie
 1,336,1,SOLUSDT,long,B,2026-10-09T04:20:27Z,2026-10-13T00:51:28Z,110.62562694,102.93480516,0.97762158,-1.024,-7.6849,0.1044,-0.0618,stop_loss
 2,340,1,ETHUSDT,long,B,2026-10-10T00:00:44Z,2026-10-15T02:24:32Z,2486.56466195,2342.36071845,0.05530924,-1.083,-8.1186,0.1335,-0.0093,stop_loss
+3,338,1,XRPUSDT,long,B,2026-10-09T04:20:28Z,2026-10-17T21:30:01Z,1.39717123,1.28133516,65.25327621,-1.021,-7.6637,0.0874,-0.0176,stop_loss
