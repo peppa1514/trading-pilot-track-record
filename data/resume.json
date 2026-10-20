@@ -1,24 +1,24 @@
 {
- "date": "2026-10-19",
- "jour": 10,
+ "date": "2026-10-20",
+ "jour": 11,
  "jour0": "2026-10-09",
- "valeur": 963.5547920617792,
- "variation_pct": -3.6445207938220814,
- "variation_usd": -36.44520793822085,
+ "valeur": 964.2175303877158,
+ "variation_pct": -3.5782469612284262,
+ "variation_usd": -35.78246961228422,
  "references_usd": {
-  "btc_conserve": 995.1893606021067,
-  "btc_eth_50_50": 980.5085403501799,
-  "btc_ma200": 995.1893606021071
+  "btc_conserve": 993.0369709284386,
+  "btc_eth_50_50": 978.9715326394364,
+  "btc_ma200": 993.0369709284388
  },
- "valeur_actuelle": 964.7819943133541,
- "horodatage_valeur": "2026-10-19T00:00:00Z",
+ "valeur_actuelle": 962.2569507709603,
+ "horodatage_valeur": "2026-10-20T00:00:00Z",
  "pire_baisse_pct": -7.138082797864853,
  "positions_ouvertes": 6,
  "trades_fermes": 3,
  "references_pct": {
-  "btc_conserve": -0.48106393978932793,
-  "btc_eth_50_50": -1.949145964982002,
-  "btc_ma200": -0.4810639397892946
+  "btc_conserve": -0.6963029071561433,
+  "btc_eth_50_50": -2.102846736056363,
+  "btc_ma200": -0.6963029071561211
  },
  "statut": "alive",
  "vie": 1,
@@ -30,7 +30,7 @@
    "sens": "long",
    "methode": "B",
    "ouverture_utc": "2026-10-09T04:20:27Z",
-   "jours_ouverte": 9.9,
+   "jours_ouverte": 10.9,
    "entree": 82482.03528966798,
    "quantite": 0.0022178162718411304,
    "stop": 79096.29999999999,
@@ -38,9 +38,9 @@
    "objectif": 92622.7,
    "si_objectif_usd": 22.490131201859462,
    "stop_suiveur": false,
-   "prix_actuel": 82418.0,
-   "pnl_latent_usd": -0.1420185073977136,
-   "r_latent": -0.018913259363009034,
+   "prix_actuel": 81697.75,
+   "pnl_latent_usd": -1.7394006771912878,
+   "r_latent": -0.23164400715594347,
    "risque_initial_usd": 7.508938817572422
   },
   {
@@ -49,7 +49,7 @@
    "sens": "long",
    "methode": "B",
    "ouverture_utc": "2026-10-09T04:20:28Z",
-   "jours_ouverte": 9.9,
+   "jours_ouverte": 10.9,
    "entree": 742.4194673338524,
    "quantite": 0.2031331432371823,
    "stop": 705.4614,
@@ -57,9 +57,9 @@
    "objectif": 853.1358,
    "si_objectif_usd": 22.490156662168094,
    "stop_suiveur": false,
-   "prix_actuel": 724.65,
-   "pnl_latent_usd": -3.6095677531758694,
-   "r_latent": -0.4808007727605431,
+   "prix_actuel": 728.84,
+   "pnl_latent_usd": -2.7584398830120644,
+   "r_latent": -0.3674290436019094,
    "risque_initial_usd": 7.507408385496856
   },
   {
@@ -68,7 +68,7 @@
    "sens": "long",
    "methode": "B",
    "ouverture_utc": "2026-10-09T04:20:28Z",
-   "jours_ouverte": 9.9,
+   "jours_ouverte": 10.9,
    "entree": 10.272862423529412,
    "quantite": 6.926988512667319,
    "stop": 9.18936,
@@ -76,9 +76,9 @@
    "objectif": 13.51992,
    "si_objectif_usd": 22.49233053218115,
    "stop_suiveur": false,
-   "prix_actuel": 9.746,
-   "pnl_latent_usd": -3.6495699555443,
-   "r_latent": -0.4862586479624152,
+   "prix_actuel": 9.562,
+   "pnl_latent_usd": -4.924135841875094,
+   "r_latent": -0.6560782958046761,
    "risque_initial_usd": 7.505408841235435
   },
   {
@@ -87,7 +87,7 @@
    "sens": "long",
    "methode": "B",
    "ouverture_utc": "2026-10-14T00:00:14Z",
-   "jours_ouverte": 5.0,
+   "jours_ouverte": 6.0,
    "entree": 106.7953696785506,
    "quantite": 0.9685813187533306,
    "stop": 99.11303000000001,
@@ -95,9 +95,9 @@
    "objectif": 129.82091,
    "si_objectif_usd": 22.302108209557446,
    "stop_suiveur": false,
-   "prix_actuel": 104.43,
-   "pnl_latent_usd": -2.291052882589675,
-   "r_latent": -0.30789704406781215,
+   "prix_actuel": 104.84,
+   "pnl_latent_usd": -1.893934541900813,
+   "r_latent": -0.2545278860826825,
    "risque_initial_usd": 7.440970696961569
   },
   {
@@ -106,7 +106,7 @@
    "sens": "long",
    "methode": "B",
    "ouverture_utc": "2026-10-16T00:00:00Z",
-   "jours_ouverte": 3.0,
+   "jours_ouverte": 4.0,
    "entree": 2441.132665478924,
    "quantite": 0.04996451103409031,
    "stop": 2294.89485,
@@ -114,9 +114,9 @@
    "objectif": 2879.35545,
    "si_objectif_usd": 21.89558715259308,
    "stop_suiveur": false,
-   "prix_actuel": 2416.32,
-   "pnl_latent_usd": -1.2397526981068858,
-   "r_latent": -0.16967338713084074,
+   "prix_actuel": 2399.81,
+   "pnl_latent_usd": -2.064666775279728,
+   "r_latent": -0.28257168191137016,
    "risque_initial_usd": 7.306700945097958
   },
   {
@@ -125,7 +125,7 @@
    "sens": "short",
    "methode": "A",
    "ouverture_utc": "2026-10-18T00:00:42Z",
-   "jours_ouverte": 1.0,
+   "jours_ouverte": 2.0,
    "entree": 0.07925588585617926,
    "quantite": 521.3492922781892,
    "stop": 0.09306945,
@@ -133,9 +133,9 @@
    "objectif": null,
    "si_objectif_usd": null,
    "stop_suiveur": true,
-   "prix_actuel": 0.07953,
-   "pnl_latent_usd": -0.14290921488438402,
-   "r_latent": -0.01984383906765723,
+   "prix_actuel": 0.07945,
+   "pnl_latent_usd": -0.10120127150213058,
+   "r_latent": -0.014052430046272739,
    "risque_initial_usd": 7.201691890220309
   }
  ],
@@ -182,57 +182,57 @@
    {
     "symbole": "BTCUSDT",
     "tendance": "up",
-    "prix": 82418.0,
-    "moyenne_200j": 75577.7,
+    "prix": 81697.8,
+    "moyenne_200j": 75636.9,
     "sous_moyenne_200j": false
    },
    {
     "symbole": "ETHUSDT",
     "tendance": "up",
-    "prix": 2416.32,
-    "moyenne_200j": 2316.74,
+    "prix": 2399.81,
+    "moyenne_200j": 2317.44,
     "sous_moyenne_200j": false
    },
    {
     "symbole": "SOLUSDT",
     "tendance": "up",
-    "prix": 104.43,
-    "moyenne_200j": 97.0819,
+    "prix": 104.84,
+    "moyenne_200j": 97.1366,
     "sous_moyenne_200j": false
    },
    {
     "symbole": "BNBUSDT",
     "tendance": "up",
-    "prix": 724.65,
-    "moyenne_200j": 691.496,
+    "prix": 728.84,
+    "moyenne_200j": 691.78,
     "sous_moyenne_200j": false
    },
    {
     "symbole": "XRPUSDT",
     "tendance": "none",
-    "prix": 1.307,
-    "moyenne_200j": 1.37085,
+    "prix": 1.298,
+    "moyenne_200j": 1.36997,
     "sous_moyenne_200j": true
    },
    {
     "symbole": "DOGEUSDT",
     "tendance": "down",
-    "prix": 0.07953,
-    "moyenne_200j": 0.0900373,
+    "prix": 0.07945,
+    "moyenne_200j": 0.0899117,
     "sous_moyenne_200j": true
    },
    {
     "symbole": "ADAUSDT",
     "tendance": "none",
-    "prix": 0.2216,
-    "moyenne_200j": 0.232866,
+    "prix": 0.2171,
+    "moyenne_200j": 0.23268,
     "sous_moyenne_200j": true
    },
    {
     "symbole": "AVAXUSDT",
     "tendance": "up",
-    "prix": 9.746,
-    "moyenne_200j": 8.86757,
+    "prix": 9.562,
+    "moyenne_200j": 8.87422,
     "sous_moyenne_200j": false
    }
   ],
@@ -252,7 +252,7 @@
    "ADAUSDT"
   ]
  },
- "genere_utc": "2026-10-19T00:45:03Z",
+ "genere_utc": "2026-10-20T00:45:03Z",
  "depart_utc": "2026-10-09T04:20:19Z",
  "capital_depart": 1000.0,
  "cahier": "v1 (D v1, A v1, C v1, B v1; risk 0.75% per position)",
